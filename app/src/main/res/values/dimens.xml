@@ -3,4 +3,7 @@
 
     <dimen name="speedometer_progress_bar_stroke_width">15dp</dimen>
 
+    <dimen name="speedometer_progress_bar_item_height">11dp</dimen>
+    <dimen name="speedometer_progress_bar_item_width">2dp</dimen>
+
 </resources>
