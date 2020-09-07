@@ -28,6 +28,9 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     private val bigItemHeightPx = asPixels(R.dimen.linear_speedometer_progress_bar_big_item_height)
     private val itemWidthPx = asPixels(R.dimen.linear_speedometer_progress_bar_item_width)
 
+    /**
+     * Расстояние между соседними item-ами. Вычисляется динамически в [onMeasure]
+     */
     private var horizontalItemsOffset = 0f
 
     /**
@@ -75,7 +78,6 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
             if (itemPosition.rem(7) != 0) drawRegularItem() else drawBigItem()
             translate(horizontalItemsOffset + itemWidthPx, 0f)
         }
-//        drawLine(0f, bigItemHeightPx / 2 , measuredWidth.toFloat(), bigItemHeightPx / 2, rectPaint.apply { color = getColor(R.color.colorAccent)})
         restore()
     }
 
