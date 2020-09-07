@@ -4,13 +4,10 @@
     <dimen name="linear_speedometer_progress_bar_stroke_width">15dp</dimen>
 
     <dimen name="linear_speedometer_progress_bar_regular_item_height">11dp</dimen>
-    <dimen name="linear_speedometer_progress_bar_regular_item_width">2dp</dimen>
-
     <dimen name="linear_speedometer_progress_bar_big_item_height">15dp</dimen>
-    <dimen name="linear_speedometer_progress_bar_big_item_width">2dp</dimen>
+    <dimen name="linear_speedometer_progress_bar_item_width">2dp</dimen>
 
     <dimen name="linear_speedometer_progress_bar_regular_item_vertical_offset">2dp</dimen>
-    <dimen name="linear_speedometer_progress_bar_item_horizontal_offset">11dp</dimen>
 
     <dimen name="linear_speedometer_progress_bar_item_radius">14dp</dimen>
 
