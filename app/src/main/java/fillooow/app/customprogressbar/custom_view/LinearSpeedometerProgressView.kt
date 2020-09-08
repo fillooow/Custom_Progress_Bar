@@ -7,6 +7,9 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import androidx.annotation.DimenRes
 import fillooow.app.customprogressbar.R
+import kotlin.math.roundToInt
+
+private const val VISIBLE_ITEMS = 27f
 
 class LinearSpeedometerProgressView @JvmOverloads constructor(
 
@@ -50,13 +53,15 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     }
 
     /**
-     * Всего 27 элементов.
+     * Всего 27 элементов. (или 29)
      *
      * Из них:
      * [regularItem] - 24,
      * [bigItem] - 3.
+     *
+     * 0 и 28 итемы не отрисовываются
      */
-    private val itemsRange = 1 .. 27
+    private val itemsRange = 0 .. 28
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -69,7 +74,14 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
         save()
         for (itemPosition in itemsRange) {
 
-            rectPaint.color = when (itemPosition <= animatedProgress.toInt()) {
+            /**
+             * Из-за округления, необходимо пропускать нулевой итем, который мы не рисуем
+             * Последний итем нам тоже не нужен
+             * Вообще, это все абстракция для удобства расчетов
+             */
+            if ((itemPosition == itemsRange.first) or (itemPosition == itemsRange.last)) continue
+
+            rectPaint.color = when (itemPosition <= progressInt()) {
 
                 true -> foregroundPaint.color
                 false -> backgroundPaint.color
@@ -92,10 +104,10 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
      * доступной для отрисовки [LinearSpeedometerProgressView].
      * Опирается на [getMeasuredWidth]
      */
-    private fun calculateItemsOffset(): Float = (measuredWidth - itemWidthPx * itemsRange.last) / (itemsRange.last - 1)
+    private fun calculateItemsOffset(): Float = (measuredWidth - itemWidthPx * VISIBLE_ITEMS) / (VISIBLE_ITEMS - 1)
+
+    private fun progressInt() = (progress / 100f * (VISIBLE_ITEMS + 1f)).roundToInt()
 }
-
-
 
 /*
 private class BigItem : Item() {
