@@ -12,7 +12,12 @@ import org.junit.Assert.*
 class ExampleUnitTest {
 
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun addition_isCorrect_float() {
+        assertEquals(100f / 28f / 100f * 28f, 1f)
+    }
+
+    @Test
+    fun addition_isCorrect_double() {
+        assertEquals(100.0 / 28.0 / 100.0 * 28.0, 1.0, 0.00001)
     }
 }
