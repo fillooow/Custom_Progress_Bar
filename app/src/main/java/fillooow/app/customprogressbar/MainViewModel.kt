@@ -1,8 +1,9 @@
 package fillooow.app.customprogressbar
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    val progress = 15f
+    val progress = MutableLiveData<Float>(0f)
 }
