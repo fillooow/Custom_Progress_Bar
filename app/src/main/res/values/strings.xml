@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Custom Progress Bar</string>
+    <string name="linear_speedometer_label">Linear Speedometer</string>
+    <string name="radial_speedometer_label">Radial Speedometer</string>
 </resources>
