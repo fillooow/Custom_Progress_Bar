@@ -23,17 +23,19 @@ class MainActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
-        CoroutineScope(viewModel.viewModelScope.coroutineContext).launch {
+//        testLinearSpeedometer()
+    }
 
-            for (i in (0 .. 28)) {
+    private fun testLinearSpeedometer() = CoroutineScope(viewModel.viewModelScope.coroutineContext).launch {
 
-                delay(200)
-                viewModel.progress.value = (100f / 28f) * i
-                Log.i("value", "${viewModel.progress.value}")
-            }
+        for (i in (0 .. 28)) {
 
-            delay(800)
-            viewModel.progress.value = 40f
+            delay(200)
+            viewModel.progress.value = (100f / 28f) * i
+            Log.i("value", "${viewModel.progress.value}")
         }
+
+        delay(800)
+        viewModel.progress.value = 40f
     }
 }

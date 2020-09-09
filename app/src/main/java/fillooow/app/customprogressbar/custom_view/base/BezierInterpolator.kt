@@ -1,4 +1,4 @@
-package fillooow.app.customprogressbar.custom_view
+package fillooow.app.customprogressbar.custom_view.base
 
 import android.graphics.PointF
 import android.view.animation.Interpolator
@@ -13,10 +13,17 @@ object BezierInterpolator {
         )
     }
 
-    fun getDefaultPrincipleInstance(): Interpolator = createPathInterpolator(PRINCIPLE_DEFAULT_EASE)
+    fun getDefaultPrincipleInstance(): Interpolator =
+        createPathInterpolator(
+            PRINCIPLE_DEFAULT_EASE
+        )
 
     fun getInstance(bottomPoint: PointF, topPoint: PointF): Interpolator =
-        createPathInterpolator(BezierCurveParameters(bottomPoint, topPoint))
+        createPathInterpolator(
+            BezierCurveParameters(
+                bottomPoint, topPoint
+            )
+        )
 
     private fun createPathInterpolator(parameters: BezierCurveParameters) = with(parameters) {
 

@@ -1,4 +1,4 @@
-package fillooow.app.customprogressbar.custom_view
+package fillooow.app.customprogressbar.custom_view.linear
 
 import android.content.Context
 import android.graphics.Canvas
@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import androidx.annotation.DimenRes
 import androidx.core.view.updateLayoutParams
 import fillooow.app.customprogressbar.R
+import fillooow.app.customprogressbar.custom_view.base.BaseProgressView
 import kotlin.math.roundToInt
 
 private const val VISIBLE_ITEMS = 27f
