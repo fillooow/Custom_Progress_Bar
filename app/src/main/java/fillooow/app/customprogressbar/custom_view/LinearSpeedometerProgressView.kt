@@ -6,6 +6,7 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import androidx.annotation.DimenRes
+import androidx.core.view.updateLayoutParams
 import fillooow.app.customprogressbar.R
 import kotlin.math.roundToInt
 
@@ -106,19 +107,14 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
      */
     private fun calculateItemsOffset(): Float = (measuredWidth - itemWidthPx * VISIBLE_ITEMS) / (VISIBLE_ITEMS - 1)
 
+    /**
+     * Приходится применять float и [roundToInt], так как существует погрешность
+     * при операциях деления/умножения
+     */
     private fun progressInt() = (progress / 100f * (VISIBLE_ITEMS + 1f)).roundToInt()
-}
 
-/*
-private class BigItem : Item() {
-
-    override fun drawItem() {
-        TODO("Not yet implemented")
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        updateLayoutParams { height = resolvedStrokeWidth }
     }
 }
-
-private abstract class Item() {
-
-    abstract fun drawItem()
-}
-*/
