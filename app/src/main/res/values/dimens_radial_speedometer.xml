@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="radial_speedometer_progress_bar_stroke_height">240dp</dimen>
+    <dimen name="radial_speedometer_progress_bar_stroke_width">240dp</dimen>
+
+    <dimen name="radial_speedometer_progress_bar_regular_item_height">11dp</dimen>
+    <dimen name="radial_speedometer_progress_bar_big_item_height">15dp</dimen>
+    <dimen name="radial_speedometer_progress_bar_item_width">2dp</dimen>
+
+    <dimen name="radial_speedometer_progress_bar_regular_item_vertical_offset">2dp</dimen>
+
+    <dimen name="radial_speedometer_progress_bar_item_radius">14dp</dimen>
+
+</resources>
