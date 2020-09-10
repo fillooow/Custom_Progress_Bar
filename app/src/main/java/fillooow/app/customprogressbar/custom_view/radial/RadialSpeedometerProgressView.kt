@@ -45,6 +45,8 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     private val regularItemHeight = asPixels(R.dimen.radial_speedometer_progress_bar_regular_item_height)
     private val regularItemWidth = asPixels(R.dimen.radial_speedometer_progress_bar_item_width)
 
+    private val itemRadius = asPixels(R.dimen.radial_speedometer_progress_bar_item_radius)
+
     private val circleRadius = viewHeight / 2f - bigItemHeight / 2f
     private val circleCenter = viewHeight / 2f
     // todo: заменить на offsetName
@@ -77,8 +79,8 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         drawLine(bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
         drawLine(circleRadius + bigItemHeight / 2, bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
 
-        drawArc(rect, ARC_START_ANGLE, ARC_ANGLE_LENGTH, false, backgroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
-        drawArc(rect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
+//        drawArc(rect, ARC_START_ANGLE, ARC_ANGLE_LENGTH, false, backgroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
+//        drawArc(rect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
 
 //        val currentProgressX = circleCenter + circleRadius * cos((ARC_START_ANGLE + progressSweepAngle).toRadians())
 //        val currentProgressY = circleCenter + circleRadius * sin((ARC_START_ANGLE + progressSweepAngle).toRadians())
@@ -123,7 +125,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
              * а отрисовка производится из правого угла точка (2 * circleRadius, 0), где точка имеет координаты (x, y)
              */
             rotate(ARC_START_ANGLE + 90f + 5f * (itemPosition - 1))
-            if (itemPosition.rem(13) != 0) drawRect(regularItem, testItemPaint) else drawRect(bigItem, testItemPaint)
+            if (itemPosition.rem(13) != 0) drawRoundRect(regularItem, itemRadius, itemRadius, testItemPaint) else drawRoundRect(bigItem, itemRadius, itemRadius, testItemPaint)
             restore()
         }
     }

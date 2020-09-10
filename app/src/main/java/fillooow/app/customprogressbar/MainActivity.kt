@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
-//        testLinearSpeedometer()
+        testLinearSpeedometer()
     }
 
     private fun testLinearSpeedometer() = CoroutineScope(viewModel.viewModelScope.coroutineContext).launch {
