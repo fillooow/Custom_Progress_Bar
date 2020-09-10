@@ -54,8 +54,14 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     private val regularItemTopOffsetCalculated = (bigItemHeight - regularItemHeight) / 2
 
-    private val bigItem = RectF(0f, 0f, bigItemWidth, bigItemHeight)
-    private val regularItem = RectF(0f, regularItemTopOffsetCalculated, regularItemWidth, regularItemHeight + regularItemTopOffsetCalculated)
+    /**
+     * Существует, так как у нас итем рисуется не с серидины, а с угла
+     * поэтому, нужно сместить всю вью на середину самой себя
+     */
+    private val horizontalItemOffset = bigItemWidth / 2
+
+    private val bigItem = RectF(- horizontalItemOffset, 0f, bigItemWidth - horizontalItemOffset, bigItemHeight)
+    private val regularItem = RectF(- horizontalItemOffset, regularItemTopOffsetCalculated, regularItemWidth - horizontalItemOffset, regularItemHeight + regularItemTopOffsetCalculated)
 
     private val testItemPaint = Paint().apply {
 
@@ -67,6 +73,9 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     override fun Canvas.drawProgress() {
 
         val progressSweepAngle = ARC_ANGLE_LENGTH * progress / MAX_PROGRESS_VALUE
+
+        drawLine(bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
+        drawLine(circleRadius + bigItemHeight / 2, bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
 
         drawArc(rect, ARC_START_ANGLE, ARC_ANGLE_LENGTH, false, backgroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
         drawArc(rect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
@@ -108,7 +117,12 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
             val handleCenterY = circleCenter + (bigItemHeight / 2 + circleRadius) * sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (itemPosition - 1)).toRadians())
 
             translate(handleCenterX, handleCenterY)
-            rotate(360 - ARC_START_ANGLE + 5f * itemPosition + 15)
+            /**
+             * itemPosition - 1 <- так как нам не нужен сдвиг бля первого элемента
+             * + 90f <- так как по умолчанию палочка рисуется сверху вниз (то есть, вертикально),
+             * а отрисовка производится из правого угла точка (2 * circleRadius, 0), где точка имеет координаты (x, y)
+             */
+            rotate(ARC_START_ANGLE + 90f + 5f * (itemPosition - 1))
             if (itemPosition.rem(13) != 0) drawRect(regularItem, testItemPaint) else drawRect(bigItem, testItemPaint)
 
 //            drawRect(bigItem, testItemPaint)
