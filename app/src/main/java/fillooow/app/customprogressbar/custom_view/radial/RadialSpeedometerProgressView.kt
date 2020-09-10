@@ -63,8 +63,25 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         drawArc(rect, ARC_START_ANGLE, ARC_ANGLE_LENGTH, false, backgroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
         drawArc(rect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
 
-        val currentProgressX = circleCenter + circleRadius * cos((ARC_START_ANGLE + progressSweepAngle).toRadians())
-        val currentProgressY = circleCenter + circleRadius * sin((ARC_START_ANGLE + progressSweepAngle).toRadians())
+//        val currentProgressX = circleCenter + circleRadius * cos((ARC_START_ANGLE + progressSweepAngle).toRadians())
+//        val currentProgressY = circleCenter + circleRadius * sin((ARC_START_ANGLE + progressSweepAngle).toRadians())
+//        drawSpeedometerFirstVersion()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        updateLayoutParams {
+            width = viewWidth
+            height = viewHeight
+            setBackgroundColor(Color.CYAN)
+        }
+    }
+
+    private fun asPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
+
+    private fun progressInt() = (progress / 100f * (VISIBLE_ITEMS + 1f)).roundToInt()
+
+    private fun Canvas.drawSpeedometerFirstVersion() {
 
         for (itemPosition in itemsRange) {
 
@@ -81,20 +98,5 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
             drawCircle(handleCenterX, handleCenterY, bigItemWidth * 2, testItemPaint)
         }
-
-//        drawCircle(handleCenterX, handleCenterY, handleRadius, handlePaint)
     }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        updateLayoutParams {
-            width = viewWidth
-            height = viewHeight
-            setBackgroundColor(Color.CYAN)
-        }
-    }
-
-    private fun asPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
-
-    private fun progressInt() = (progress / 100f * (VISIBLE_ITEMS + 1f)).roundToInt()
 }
