@@ -119,3 +119,5 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
         updateLayoutParams { height = resolvedStrokeWidth }
     }
 }
+
+// todo: цвета

@@ -17,3 +17,5 @@ fun Number.dpFloat(context: Context): Float {
     val metrics = context.resources.displayMetrics
     return this.toFloat() * (metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
 }
+
+fun Number.toRadians(): Float = Math.toRadians(this.toDouble()).toFloat()
