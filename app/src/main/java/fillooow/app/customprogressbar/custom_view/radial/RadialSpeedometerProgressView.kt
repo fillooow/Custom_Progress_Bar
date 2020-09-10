@@ -102,8 +102,8 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
 
         for (itemPosition in itemsRange) {
-            save()
 
+            save()
 
             if ((itemPosition == itemsRange.first) or (itemPosition == itemsRange.last)) continue
 
@@ -124,8 +124,6 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
              */
             rotate(ARC_START_ANGLE + 90f + 5f * (itemPosition - 1))
             if (itemPosition.rem(13) != 0) drawRect(regularItem, testItemPaint) else drawRect(bigItem, testItemPaint)
-
-//            drawRect(bigItem, testItemPaint)
             restore()
         }
     }
