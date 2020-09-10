@@ -42,12 +42,20 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     private val bigItemHeight = asPixels(R.dimen.radial_speedometer_progress_bar_big_item_height)
     private val bigItemWidth = asPixels(R.dimen.radial_speedometer_progress_bar_item_width)
 
+    private val regularItemHeight = asPixels(R.dimen.radial_speedometer_progress_bar_regular_item_height)
+    private val regularItemWidth = asPixels(R.dimen.radial_speedometer_progress_bar_item_width)
+
     private val circleRadius = viewHeight / 2f - bigItemHeight / 2f
     private val circleCenter = viewHeight / 2f
     // todo: заменить на offsetName
     private val rect = RectF(bigItemHeight / 2, bigItemHeight / 2, viewWidth.toFloat() - bigItemHeight / 2f, viewHeight.toFloat() - bigItemHeight / 2f)
 
     private val itemsRange = 0 .. 52
+
+    private val regularItemTopOffsetCalculated = (bigItemHeight - regularItemHeight) / 2
+
+    private val bigItem = RectF(0f, 0f, bigItemWidth, bigItemHeight)
+    private val regularItem = RectF(0f, regularItemTopOffsetCalculated, regularItemWidth, regularItemHeight + regularItemTopOffsetCalculated)
 
     private val testItemPaint = Paint().apply {
 
@@ -65,7 +73,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
 //        val currentProgressX = circleCenter + circleRadius * cos((ARC_START_ANGLE + progressSweepAngle).toRadians())
 //        val currentProgressY = circleCenter + circleRadius * sin((ARC_START_ANGLE + progressSweepAngle).toRadians())
-//        drawSpeedometerFirstVersion()
+        drawSpeedometerFirstVersion()
     }
 
     override fun onAttachedToWindow() {
@@ -83,7 +91,10 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     private fun Canvas.drawSpeedometerFirstVersion() {
 
+
         for (itemPosition in itemsRange) {
+            save()
+
 
             if ((itemPosition == itemsRange.first) or (itemPosition == itemsRange.last)) continue
 
@@ -93,10 +104,15 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
                 false -> backgroundPaint.color
             }
 
-            val handleCenterX = circleCenter + circleRadius * cos((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * itemPosition).toRadians())
-            val handleCenterY = circleCenter + circleRadius * sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * itemPosition).toRadians())
+            val handleCenterX = circleCenter + (bigItemHeight / 2 + circleRadius) * cos((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (itemPosition - 1)).toRadians())
+            val handleCenterY = circleCenter + (bigItemHeight / 2 + circleRadius) * sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (itemPosition - 1)).toRadians())
 
-            drawCircle(handleCenterX, handleCenterY, bigItemWidth * 2, testItemPaint)
+            translate(handleCenterX, handleCenterY)
+            rotate(360 - ARC_START_ANGLE + 5f * itemPosition + 15)
+            if (itemPosition.rem(13) != 0) drawRect(regularItem, testItemPaint) else drawRect(bigItem, testItemPaint)
+
+//            drawRect(bigItem, testItemPaint)
+            restore()
         }
     }
 }
