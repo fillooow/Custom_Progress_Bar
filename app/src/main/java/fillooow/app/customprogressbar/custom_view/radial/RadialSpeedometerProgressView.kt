@@ -15,7 +15,7 @@ import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin
 
-private const val VISIBLE_ITEMS = 51f
+private const val VISIBLE_DIVISIONS = 51f
 
 class RadialSpeedometerProgressView @JvmOverloads constructor(
 
@@ -39,33 +39,33 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     private val viewWidth = resources.getDimensionPixelSize(R.dimen.radial_speedometer_progress_bar_width)
     private val viewHeight = resources.getDimensionPixelSize(R.dimen.radial_speedometer_progress_bar_height)
 
-    private val bigItemHeight = asPixels(R.dimen.radial_speedometer_progress_bar_big_item_height)
-    private val bigItemWidth = asPixels(R.dimen.radial_speedometer_progress_bar_item_width)
+    private val bigDivisionHeight = asPixels(R.dimen.radial_speedometer_progress_bar_big_division_height)
+    private val bigDivisionWidth = asPixels(R.dimen.radial_speedometer_progress_bar_division_width)
 
-    private val regularItemHeight = asPixels(R.dimen.radial_speedometer_progress_bar_regular_item_height)
-    private val regularItemWidth = asPixels(R.dimen.radial_speedometer_progress_bar_item_width)
+    private val regularDivisionHeight = asPixels(R.dimen.radial_speedometer_progress_bar_regular_division_height)
+    private val regularDivisionWidth = asPixels(R.dimen.radial_speedometer_progress_bar_division_width)
 
-    private val itemRadius = asPixels(R.dimen.radial_speedometer_progress_bar_item_radius)
+    private val divisionRadius = asPixels(R.dimen.radial_speedometer_progress_bar_division_radius)
 
-    private val circleRadius = viewHeight / 2f - bigItemHeight / 2f
+    private val circleRadius = viewHeight / 2f - bigDivisionHeight / 2f
     private val circleCenter = viewHeight / 2f
     // todo: заменить на offsetName
-    private val rect = RectF(bigItemHeight / 2, bigItemHeight / 2, viewWidth.toFloat() - bigItemHeight / 2f, viewHeight.toFloat() - bigItemHeight / 2f)
+    private val rect = RectF(bigDivisionHeight / 2, bigDivisionHeight / 2, viewWidth.toFloat() - bigDivisionHeight / 2f, viewHeight.toFloat() - bigDivisionHeight / 2f)
 
-    private val itemsRange = 0 .. 52
+    private val divisionRange = 0 .. 52
 
-    private val regularItemTopOffsetCalculated = (bigItemHeight - regularItemHeight) / 2
+    private val regularDivisionTopOffsetCalculated = (bigDivisionHeight - regularDivisionHeight) / 2
 
     /**
      * Существует, так как у нас итем рисуется не с серидины, а с угла
      * поэтому, нужно сместить всю вью на середину самой себя
      */
-    private val horizontalItemOffset = bigItemWidth / 2
+    private val horizontalDivisionOffset = bigDivisionWidth / 2
 
-    private val bigItem = RectF(- horizontalItemOffset, 0f, bigItemWidth - horizontalItemOffset, bigItemHeight)
-    private val regularItem = RectF(- horizontalItemOffset, regularItemTopOffsetCalculated, regularItemWidth - horizontalItemOffset, regularItemHeight + regularItemTopOffsetCalculated)
+    private val bigDivision = RectF(- horizontalDivisionOffset, 0f, bigDivisionWidth - horizontalDivisionOffset, bigDivisionHeight)
+    private val regularDivision = RectF(- horizontalDivisionOffset, regularDivisionTopOffsetCalculated, regularDivisionWidth - horizontalDivisionOffset, regularDivisionHeight + regularDivisionTopOffsetCalculated)
 
-    private val testItemPaint = Paint().apply {
+    private val testDivisionPaint = Paint().apply {
 
         style = Paint.Style.FILL
         color = Color.RED
@@ -90,33 +90,33 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     private fun asPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
 
-    private fun progressInt() = (progress / 100f * (VISIBLE_ITEMS + 1f)).roundToInt()
+    private fun progressInt() = (progress / 100f * (VISIBLE_DIVISIONS + 1f)).roundToInt()
 
     private fun Canvas.drawSpeedometerFirstVersion() {
 
-        for (itemPosition in itemsRange) {
+        for (divisionPosition in divisionRange) {
 
             save()
 
-            if ((itemPosition == itemsRange.first) or (itemPosition == itemsRange.last)) continue
+            if ((divisionPosition == divisionRange.first) or (divisionPosition == divisionRange.last)) continue
 
-            testItemPaint.color = when (itemPosition <= progressInt()) {
+            testDivisionPaint.color = when (divisionPosition <= progressInt()) {
 
                 true -> foregroundPaint.color
                 false -> backgroundPaint.color
             }
 
-            val handleCenterX = circleCenter + (bigItemHeight / 2 + circleRadius) * cos((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (itemPosition - 1)).toRadians())
-            val handleCenterY = circleCenter + (bigItemHeight / 2 + circleRadius) * sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (itemPosition - 1)).toRadians())
+            val handleCenterX = circleCenter + (bigDivisionHeight / 2 + circleRadius) * cos((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
+            val handleCenterY = circleCenter + (bigDivisionHeight / 2 + circleRadius) * sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
 
             translate(handleCenterX, handleCenterY)
             /**
-             * itemPosition - 1 <- так как нам не нужен сдвиг бля первого элемента
+             * divisionPosition - 1 <- так как нам не нужен сдвиг бля первого элемента
              * + 90f <- так как по умолчанию палочка рисуется сверху вниз (то есть, вертикально),
              * а отрисовка производится из правого угла точка (2 * circleRadius, 0), где точка имеет координаты (x, y)
              */
-            rotate(ARC_START_ANGLE + 90f + 5f * (itemPosition - 1))
-            if (itemPosition.rem(13) != 0) drawRoundRect(regularItem, itemRadius, itemRadius, testItemPaint) else drawRoundRect(bigItem, itemRadius, itemRadius, testItemPaint)
+            rotate(ARC_START_ANGLE + 90f + 5f * (divisionPosition - 1))
+            if (divisionPosition.rem(13) != 0) drawRoundRect(regularDivision, divisionRadius, divisionRadius, testDivisionPaint) else drawRoundRect(bigDivision, divisionRadius, divisionRadius, testDivisionPaint)
             restore()
         }
     }
@@ -129,16 +129,16 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     private fun Canvas.drawTestCenterLines() {
 
-        drawLine(bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
-        drawLine(circleRadius + bigItemHeight / 2, bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
+        drawLine(bigDivisionHeight / 2, circleRadius + bigDivisionHeight / 2, 2 * circleRadius + bigDivisionHeight / 2, circleRadius + bigDivisionHeight / 2, Paint().apply { color = Color.BLACK })
+        drawLine(circleRadius + bigDivisionHeight / 2, bigDivisionHeight / 2, circleRadius + bigDivisionHeight / 2, 2 * circleRadius + bigDivisionHeight / 2, Paint().apply { color = Color.BLACK })
     }
 
     private fun Canvas.drawTestRadialArcs() {
 
         val progressSweepAngle = ARC_ANGLE_LENGTH * progress / MAX_PROGRESS_VALUE
 
-        drawArc(rect, ARC_START_ANGLE, ARC_ANGLE_LENGTH, false, backgroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
-        drawArc(rect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
+        drawArc(rect, ARC_START_ANGLE, ARC_ANGLE_LENGTH, false, backgroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigDivisionWidth })
+        drawArc(rect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigDivisionWidth })
 
     }
 }

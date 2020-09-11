@@ -6,12 +6,12 @@
 
     <dimen name="radial_speedometer_progress_bar_stroke_width">25dp</dimen>
 
-    <dimen name="radial_speedometer_progress_bar_regular_item_height">15dp</dimen>
-    <dimen name="radial_speedometer_progress_bar_big_item_height">25dp</dimen>
-    <dimen name="radial_speedometer_progress_bar_item_width">2dp</dimen>
+    <dimen name="radial_speedometer_progress_bar_regular_division_height">15dp</dimen>
+    <dimen name="radial_speedometer_progress_bar_big_division_height">25dp</dimen>
+    <dimen name="radial_speedometer_progress_bar_division_width">2dp</dimen>
 
-    <dimen name="radial_speedometer_progress_bar_regular_item_vertical_offset">2dp</dimen>
+    <dimen name="radial_speedometer_progress_bar_regular_division_vertical_offset">2dp</dimen>
 
-    <dimen name="radial_speedometer_progress_bar_item_radius">14dp</dimen>
+    <dimen name="radial_speedometer_progress_bar_division_radius">14dp</dimen>
 
 </resources>
