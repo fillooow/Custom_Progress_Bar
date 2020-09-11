@@ -35,7 +35,9 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     override val backgroundPaintColorResId: Int = R.color.kit_grey_300
     override val foregroundPaintColorResId: Int = R.color.kit_brand
 
-    private val regularDivisionVerticalOffset = asPixels(R.dimen.linear_speedometer_progress_bar_regular_division_vertical_offset)
+    private val regularDivisionVerticalOffset = asPixels(
+        R.dimen.linear_speedometer_progress_bar_regular_division_vertical_offset
+    )
 
     private val regularDivisionRadius = asPixels(R.dimen.linear_speedometer_progress_bar_division_radius)
 
@@ -53,10 +55,11 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
      * Так как [bigDivision] выше, чем [regularDivision],
      * нужно добавить отступ сверху для [regularDivision].
      */
-    private val regularItemTopOffsetCalculated = (bigDivisionHeight - regularDivisionHeight) / 2
+    private val regularItemTopOffset = (bigDivisionHeight - regularDivisionHeight) / 2
 
-    private val regularDivision = RectF(0f, regularDivisionVerticalOffset, divisionWidth, regularDivisionHeight + regularItemTopOffsetCalculated)
     private val bigDivision = RectF(0f, 0f, divisionWidth, bigDivisionHeight)
+    private val regularDivision = RectF(0f, regularDivisionVerticalOffset, divisionWidth,
+                                        regularDivisionHeight + regularItemTopOffset)
 
     private val divisionPaint = Paint().apply {
 
@@ -118,7 +121,10 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
      *
      * Опирается на [getMeasuredWidth]
      */
-    private fun calculateDivisionOffset(): Float = (measuredWidth - divisionWidth * VISIBLE_DIVISIONS) / (VISIBLE_DIVISIONS - 1f)
+    private fun calculateDivisionOffset(): Float {
+
+        return (measuredWidth - divisionWidth * VISIBLE_DIVISIONS) / (VISIBLE_DIVISIONS - 1f)
+    }
 
     /**
      * Переводит [progress] в деления шкалы прогресса.
@@ -127,6 +133,7 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+
         updateLayoutParams { height = resolvedStrokeWidth }
     }
 }
