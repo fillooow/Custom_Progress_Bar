@@ -12,9 +12,16 @@ import fillooow.app.customprogressbar.custom_view.base.BaseProgressView
 import kotlin.math.roundToInt
 
 /**
- * Количество видимых шкал делений спидометра
+ * Количество видимых (рисуемых) шкал делений спидометра.
+ *
+ * [Float] - дабы избегать излишних операций приведения типа при расчетах.
  */
 private const val VISIBLE_DIVISIONS = 27f
+
+/**
+ * Каждое седьмое деление шкалы должно быть большим - [LinearSpeedometerProgressView.bigDivision]
+ */
+private const val BIG_DIVISION_REGULARITY = 7
 
 class LinearSpeedometerProgressView @JvmOverloads constructor(
 
@@ -37,20 +44,21 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     private val divisionWidth = asPixels(R.dimen.linear_speedometer_progress_bar_division_width)
 
     /**
-     * Расстояние между соседними item-ами. Вычисляется динамически в [onMeasure]
+     * Расстояние между соседними шкалами. Вычисляется
+     * динамически в [onMeasure], так как зависит от ширины экрана.
      */
     private var horizontalDivisionOffset = 0f
 
     /**
-     * Так как [bigDivision] выше, чем [regularDivision], нужно добавить отступ сверху для [regularDivision],
-     * чтобы отцентрировать все item-ы в [LinearSpeedometerProgressView].
+     * Так как [bigDivision] выше, чем [regularDivision],
+     * нужно добавить отступ сверху для [regularDivision].
      */
     private val regularItemTopOffsetCalculated = (bigDivisionHeight - regularDivisionHeight) / 2
 
     private val regularDivision = RectF(0f, regularDivisionVerticalOffset, divisionWidth, regularDivisionHeight + regularItemTopOffsetCalculated)
     private val bigDivision = RectF(0f, 0f, divisionWidth, bigDivisionHeight)
 
-    private val rectPaint = Paint().apply {
+    private val divisionPaint = Paint().apply {
 
         style = Paint.Style.FILL
         color = backgroundPaint.color
@@ -58,13 +66,9 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     }
 
     /**
-     * Всего 27 элементов. (или 29)
-     *
-     * Из них:
-     * [regularDivision] - 24,
-     * [bigDivision] - 3.
-     *
-     * 0 и 28 шкалы делений не отрисовываются
+     * Для удобства рассчетов и отрисовки подразумеваем, что у нас на 2 элемента больше,
+     * чем указано в [VISIBLE_DIVISIONS]. Так удобнее вычислять и отрисовывать граничные
+     * деления шкалы прогресс бара.
      */
     private val divisionsRange = 0 .. 28
 
@@ -78,49 +82,51 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
 
         save()
 
-        rectPaint.color = foregroundPaint.color
+        divisionPaint.color = foregroundPaint.color
 
         for (divisionPosition in divisionsRange) {
 
             /**
-             * Из-за округления, необходимо пропускать нулевое деление, которое мы не рисуем
-             * Последнее деление нам тоже не нужно
-             * Вообще, это все абстракция для удобства расчетов
+             * Нулевое и последнее деления шкалы не отрисовываются, они нужны лишь
+             * для рассчетов текущего прогресса и корректного отрисовки видимых делений шкалы.
              */
             if ((divisionPosition == divisionsRange.first) or (divisionPosition == divisionsRange.last)) continue
 
-            if ((divisionPosition == progressInt()) or (progressInt() == 0)) rectPaint.color = backgroundPaint.color
+            if ((divisionPosition == calculateProgressDivisions()) or (calculateProgressDivisions() == 0)) {
+                divisionPaint.color = backgroundPaint.color
+            }
 
-            if (divisionPosition.rem(7) != 0) drawRegularDivision() else drawBigDivision()
+            if (divisionPosition.rem(BIG_DIVISION_REGULARITY) != 0) drawRegularDivision() else drawBigDivision()
 
             translate(horizontalDivisionOffset + divisionWidth, 0f)
         }
         restore()
     }
 
-    private fun Canvas.drawRegularDivision() = drawRoundRect(regularDivision, regularDivisionRadius, regularDivisionRadius, rectPaint)
+    private fun Canvas.drawBigDivision() = drawDivision(bigDivision)
+    private fun Canvas.drawRegularDivision() = drawDivision(regularDivision)
 
-    private fun Canvas.drawBigDivision() = drawRoundRect(bigDivision, regularDivisionRadius, regularDivisionRadius, rectPaint)
+    private fun Canvas.drawDivision(divisionRect: RectF) {
+        drawRoundRect(divisionRect, regularDivisionRadius, regularDivisionRadius, divisionPaint)
+    }
 
     private fun asPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
 
     /**
      * Считает расстояние между делениями шкал в зависимости от ширины экрана
      * доступной для отрисовки [LinearSpeedometerProgressView].
+     *
      * Опирается на [getMeasuredWidth]
      */
-    private fun calculateDivisionOffset(): Float = (measuredWidth - divisionWidth * VISIBLE_DIVISIONS) / (VISIBLE_DIVISIONS - 1)
+    private fun calculateDivisionOffset(): Float = (measuredWidth - divisionWidth * VISIBLE_DIVISIONS) / (VISIBLE_DIVISIONS - 1f)
 
     /**
-     * Приходится применять float и [roundToInt], так как существует погрешность
-     * при операциях деления/умножения
+     * Переводит [progress] в деления шкалы прогресса.
      */
-    private fun progressInt() = (progress / 100f * (VISIBLE_DIVISIONS + 1f)).roundToInt()
+    private fun calculateProgressDivisions() = (progress / 100f * (VISIBLE_DIVISIONS + 1f)).roundToInt()
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         updateLayoutParams { height = resolvedStrokeWidth }
     }
 }
-
-// todo: цвета
