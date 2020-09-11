@@ -74,16 +74,17 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     override fun Canvas.drawProgress() {
 
-        drawTestHelpers()
+//        drawTestHelpers()
         drawSpeedometerFirstVersion()
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+
         updateLayoutParams {
             width = viewWidth
             height = viewHeight
-            setBackgroundColor(Color.CYAN)
+//            setBackgroundColor(Color.CYAN)
         }
     }
 
