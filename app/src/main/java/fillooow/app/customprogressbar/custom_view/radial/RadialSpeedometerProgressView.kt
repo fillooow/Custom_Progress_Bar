@@ -74,16 +74,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     override fun Canvas.drawProgress() {
 
-        val progressSweepAngle = ARC_ANGLE_LENGTH * progress / MAX_PROGRESS_VALUE
-
-        drawLine(bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
-        drawLine(circleRadius + bigItemHeight / 2, bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
-
-//        drawArc(rect, ARC_START_ANGLE, ARC_ANGLE_LENGTH, false, backgroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
-//        drawArc(rect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
-
-//        val currentProgressX = circleCenter + circleRadius * cos((ARC_START_ANGLE + progressSweepAngle).toRadians())
-//        val currentProgressY = circleCenter + circleRadius * sin((ARC_START_ANGLE + progressSweepAngle).toRadians())
+        drawTestHelpers()
         drawSpeedometerFirstVersion()
     }
 
@@ -101,7 +92,6 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     private fun progressInt() = (progress / 100f * (VISIBLE_ITEMS + 1f)).roundToInt()
 
     private fun Canvas.drawSpeedometerFirstVersion() {
-
 
         for (itemPosition in itemsRange) {
 
@@ -128,5 +118,26 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
             if (itemPosition.rem(13) != 0) drawRoundRect(regularItem, itemRadius, itemRadius, testItemPaint) else drawRoundRect(bigItem, itemRadius, itemRadius, testItemPaint)
             restore()
         }
+    }
+
+    private fun Canvas.drawTestHelpers() {
+
+        drawTestRadialArcs()
+        drawTestCenterLines()
+    }
+
+    private fun Canvas.drawTestCenterLines() {
+
+        drawLine(bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
+        drawLine(circleRadius + bigItemHeight / 2, bigItemHeight / 2, circleRadius + bigItemHeight / 2, 2 * circleRadius + bigItemHeight / 2, Paint().apply { color = Color.BLACK })
+    }
+
+    private fun Canvas.drawTestRadialArcs() {
+
+        val progressSweepAngle = ARC_ANGLE_LENGTH * progress / MAX_PROGRESS_VALUE
+
+        drawArc(rect, ARC_START_ANGLE, ARC_ANGLE_LENGTH, false, backgroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
+        drawArc(rect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = bigItemWidth })
+
     }
 }
