@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
-//        testLinearSpeedometer()
-        testRadialSpeedometerProgressView()
+        testLinearSpeedometer()
+//        testRadialSpeedometerProgressView()
     }
 
     private fun testRadialSpeedometerProgressView() = CoroutineScope(viewModel.viewModelScope.coroutineContext).launch {

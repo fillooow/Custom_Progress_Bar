@@ -77,6 +77,9 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     override fun Canvas.drawProgress() {
 
         save()
+
+        rectPaint.color = foregroundPaint.color
+
         for (divisionPosition in divisionsRange) {
 
             /**
@@ -86,13 +89,10 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
              */
             if ((divisionPosition == divisionsRange.first) or (divisionPosition == divisionsRange.last)) continue
 
-            rectPaint.color = when (divisionPosition <= progressInt()) {
-
-                true -> foregroundPaint.color
-                false -> backgroundPaint.color
-            }
+            if ((divisionPosition == progressInt()) or (progressInt() == 0)) rectPaint.color = backgroundPaint.color
 
             if (divisionPosition.rem(7) != 0) drawRegularDivision() else drawBigDivision()
+
             translate(horizontalDivisionOffset + divisionWidth, 0f)
         }
         restore()
