@@ -65,8 +65,12 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
      */
     private val divisionLeftTopCornerFromCenterOffset = bigDivisionHeight / 2 + circleRadius
 
-    override val bigDivision = RectF(- horizontalDivisionOffset, 0f, divisionWidth - horizontalDivisionOffset, bigDivisionHeight)
-    override val regularDivision = RectF(- horizontalDivisionOffset, regularItemTopOffset, divisionWidth - horizontalDivisionOffset, regularDivisionHeight + regularItemTopOffset)
+    override val bigDivision = RectF(- horizontalDivisionOffset, 0f,
+                                     divisionWidth - horizontalDivisionOffset, bigDivisionHeight)
+
+    override val regularDivision = RectF(- horizontalDivisionOffset, regularItemTopOffset,
+                                         divisionWidth - horizontalDivisionOffset,
+                                         regularDivisionHeight + regularItemTopOffset)
 
     override val divisionPaint = Paint().apply {
 
