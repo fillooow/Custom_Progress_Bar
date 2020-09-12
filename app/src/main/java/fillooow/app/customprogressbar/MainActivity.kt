@@ -25,17 +25,31 @@ class MainActivity : AppCompatActivity() {
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
-        testLinearSpeedometer()
-//        testRadialSpeedometerProgressView()
+//        testLinearSpeedometer()
+        testRadialSpeedometerProgressView()
     }
 
     private fun testRadialSpeedometerProgressView() = CoroutineScope(viewModel.viewModelScope.coroutineContext).launch {
 
-        for (i in (0 .. 10)) {
+        delay(800)
+        viewModel.radialProgress.value = 50f
 
-            delay(700)
+        delay(800)
+        viewModel.radialProgress.value = 0f
+
+        delay(800)
+        viewModel.radialProgress.value = 100f
+
+        delay(800)
+        viewModel.radialProgress.value = 25f
+
+        delay(800)
+        viewModel.radialProgress.value = 75f
+
+        for (i in (0 .. 4)) {
+
+            delay(800)
             viewModel.radialProgress.value = (100f / 52f) * Random.nextInt(0 .. 52)
-//            Log.i("value", "${viewModel.progress.value}")
         }
 
         delay(800)
