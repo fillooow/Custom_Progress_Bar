@@ -7,8 +7,6 @@
     <dimen name="linear_speedometer_progress_bar_big_division_height">15dp</dimen>
     <dimen name="linear_speedometer_progress_bar_division_width">2dp</dimen>
 
-    <dimen name="linear_speedometer_progress_bar_regular_division_vertical_offset">2dp</dimen>
-
     <dimen name="linear_speedometer_progress_bar_division_radius">14dp</dimen>
 
 </resources>
