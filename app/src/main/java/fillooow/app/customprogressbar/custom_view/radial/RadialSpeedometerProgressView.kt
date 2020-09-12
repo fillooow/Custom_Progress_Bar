@@ -27,6 +27,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         private const val ARC_START_ANGLE = 145f
         private const val ARC_ANGLE_LENGTH = 250f
         private const val ARC_ANGLE_BETWEEN_ITEMS = 5f
+        private const val ORIENTATION_CHANGE_ANGLE = 90f
     }
 
     private val viewWidth = resources.getDimensionPixelSize(R.dimen.radial_speedometer_progress_bar_width)
@@ -57,6 +58,12 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
      * происходит смещение на половину ширины деления шкалы. Данное поле нивелирует это смещение.
      */
     private val horizontalDivisionOffset = divisionWidth / 2
+
+    /**
+     * Расстояние от центра окружности до левого верхнего угла,
+     * с которого начнет отрисовываться деление шкалы.
+     */
+    private val divisionLeftTopCornerFromCenterOffset = bigDivisionHeight / 2 + circleRadius
 
     override val bigDivision = RectF(- horizontalDivisionOffset, 0f, divisionWidth - horizontalDivisionOffset, bigDivisionHeight)
     override val regularDivision = RectF(- horizontalDivisionOffset, regularItemTopOffset, divisionWidth - horizontalDivisionOffset, regularDivisionHeight + regularItemTopOffset)
@@ -103,22 +110,49 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
                 false -> backgroundPaint.color
             }
 
-            val divisionLeftTopCornerX = circleCenter + (bigDivisionHeight / 2 + circleRadius) * cos((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
-            val divisionLeftTopCornerY = circleCenter + (bigDivisionHeight / 2 + circleRadius) * sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
+            val divisionLeftTopCornerX = circleCenter + calculateCircumferentialOffsetByPositionX(divisionPosition)
+            val divisionLeftTopCornerY = circleCenter + calculateCircumferentialOffsetByPositionY(divisionPosition)
 
             translate(divisionLeftTopCornerX, divisionLeftTopCornerY)
 
-            /**
-             * divisionPosition - 1 <- так как нам не нужен сдвиг бля первого элемента
-             * + 90f <- так как по умолчанию палочка рисуется сверху вниз (то есть, вертикально),
-             * а отрисовка производится из правого угла точка (2 * circleRadius, 0), где точка имеет координаты (x, y)
-             */
-            rotate(ARC_START_ANGLE + 90f + 5f * (divisionPosition - 1))
+            rotate(ARC_START_ANGLE + ORIENTATION_CHANGE_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1))
 
             if (divisionPosition.rem(bigDivisionPeriodicity) != 0) drawRegularDivision() else drawBigDivision()
             restore()
         }
     }
+
+    /**
+     * Рассчитывает смещение по окружности для X координаты
+     * по номеру позиции деления шкалы.
+     */
+    private fun calculateCircumferentialOffsetByPositionX(divisionPosition: Int): Float {
+
+        return divisionLeftTopCornerFromCenterOffset * calculateRadiansOffsetByPositionX(divisionPosition)
+    }
+
+    /**
+     * Рассчитывает смещение по окружности для Y координаты
+     * по номеру позиции деления шкалы.
+     */
+    private fun calculateCircumferentialOffsetByPositionY(divisionPosition: Int): Float {
+
+        return divisionLeftTopCornerFromCenterOffset * calculateRadiansOffsetByPositionY(divisionPosition)
+    }
+
+    private fun calculateRadiansOffsetByPositionX(divisionPosition: Int): Float {
+
+        return cos((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
+    }
+
+    private fun calculateRadiansOffsetByPositionY(divisionPosition: Int): Float {
+
+        return sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
+    }
+
+
+
+
 
     private val testRect = RectF(bigDivisionHeight / 2, bigDivisionHeight / 2, viewWidth.toFloat() - bigDivisionHeight / 2f, viewHeight.toFloat() - bigDivisionHeight / 2f)
 
