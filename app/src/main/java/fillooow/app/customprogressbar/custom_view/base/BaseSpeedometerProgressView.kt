@@ -74,3 +74,6 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
         drawRoundRect(divisionRect, divisionRadius, divisionRadius, divisionPaint)
     }
 }
+
+// todo: биндинг адаптер для смены цвета
+// для этого надо создать еще одну переменную для колор рес айди

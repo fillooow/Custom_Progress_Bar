@@ -180,3 +180,5 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         drawArc(testRect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = divisionWidth })
     }
 }
+
+// todo: добавить отрисовку текста
