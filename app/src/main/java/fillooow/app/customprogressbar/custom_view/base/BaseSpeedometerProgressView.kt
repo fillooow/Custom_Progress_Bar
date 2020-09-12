@@ -63,7 +63,7 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
     protected abstract val divisionPaint: Paint
 
     /**
-     * Переводит [progress] в деления шкалы прогресса.
+     * Переводит [progress] в деления шкалы прогресса SpeedometerProgressView.
      */
     protected fun calculateProgressDivisions() = (progress / 100f * (visibleDivisions + 1f)).roundToInt()
 
