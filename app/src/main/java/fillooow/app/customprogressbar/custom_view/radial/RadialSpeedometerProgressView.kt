@@ -25,7 +25,6 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     private companion object {
 
         private const val ARC_START_ANGLE = 145f
-        private const val ARC_ANGLE_LENGTH = 250f
         private const val ARC_ANGLE_BETWEEN_ITEMS = 5f
         private const val ORIENTATION_CHANGE_ANGLE = 90f
     }
