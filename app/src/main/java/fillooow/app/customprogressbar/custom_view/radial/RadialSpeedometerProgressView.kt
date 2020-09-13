@@ -164,5 +164,3 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     private fun Canvas.drawText(text: String) = drawText(text, circleCenter, circleCenter, textPaint)
 }
-
-// todo: добавить отрисовку текста
