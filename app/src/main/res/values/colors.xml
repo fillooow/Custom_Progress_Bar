@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+    <color name="kit_primary">#333333</color>
     <color name="kit_brand">#7658E0</color>
     <color name="kit_grey_300">#E1E1E1</color>
     <color name="kit_success">#48AC98</color>

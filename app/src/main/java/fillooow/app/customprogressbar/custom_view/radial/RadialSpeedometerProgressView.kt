@@ -10,6 +10,7 @@ import androidx.annotation.DimenRes
 import androidx.core.view.updateLayoutParams
 import fillooow.app.customprogressbar.R
 import fillooow.app.customprogressbar.custom_view.base.BaseSpeedometerProgressView
+import fillooow.app.customprogressbar.custom_view.extension.createPaint
 import fillooow.app.customprogressbar.custom_view.extension.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
@@ -79,9 +80,17 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         isAntiAlias = true
     }
 
+    private val textPaint = createPaint(context, R.color.kit_primary) {
+
+        // fixme: поменять ресурс на рабочем коде
+        textSize = resources.getDimensionPixelSize(R.dimen.linear_speedometer_progress_bar_division_radius).toFloat()
+        textAlign = Paint.Align.CENTER
+    }
+
     override fun Canvas.drawProgress() {
 
 //        drawTestHelpers()
+        drawText()
         drawRadialSpeedometer()
     }
 
@@ -154,7 +163,10 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         return sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
     }
 
+    private fun Canvas.drawText() {
 
+        drawText("Сижу пержу)))", circleCenter, circleCenter, textPaint)
+    }
 
 
 
