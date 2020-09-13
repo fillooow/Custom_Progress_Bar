@@ -106,6 +106,8 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     private fun Canvas.drawRadialSpeedometer() {
 
+        divisionPaint.color = foregroundPaint.color
+
         for (divisionPosition in divisionsRange) {
 
             save()
@@ -116,10 +118,8 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
              */
             if ((divisionPosition == divisionsRange.first) or (divisionPosition == divisionsRange.last)) continue
 
-            divisionPaint.color = when (divisionPosition <= calculateProgressDivisions()) {
-
-                true -> foregroundPaint.color
-                false -> backgroundPaint.color
+            if ((divisionPosition == calculateProgressDivisions() + 1) or (calculateProgressDivisions() == 0)) {
+                divisionPaint.color = backgroundPaint.color
             }
 
             val divisionLeftTopCornerX = circleCenter + calculateCircumferentialOffsetByPositionX(divisionPosition)

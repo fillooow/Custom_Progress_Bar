@@ -58,12 +58,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun testLinearSpeedometer() = CoroutineScope(viewModel.viewModelScope.coroutineContext).launch {
 
-        for (i in (0 .. 28)) {
+        delay(800)
+        viewModel.progress.value = 50f
 
-            delay(200)
-            viewModel.progress.value = (100f / 28f) * i
-            Log.i("value", "${viewModel.progress.value}")
-        }
+        delay(800)
+        viewModel.progress.value = 0f
+
+        delay(800)
+        viewModel.progress.value = 100f
+
+        delay(800)
+        viewModel.progress.value = 25f
+
+        delay(800)
+        viewModel.progress.value = 75f
 
         delay(800)
         viewModel.progress.value = 40f
