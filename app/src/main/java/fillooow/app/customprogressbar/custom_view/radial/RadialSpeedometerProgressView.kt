@@ -2,7 +2,6 @@ package fillooow.app.customprogressbar.custom_view.radial
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
@@ -54,6 +53,8 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     private val circleCenter = viewHeight / 2f
     private val circleRadius = viewHeight / 2f - bigDivisionHeight / 2f
 
+    private var speedometerText: String? = null
+
     /**
      * Так как прямоугольник [RectF] рисуется от левого верхнего угла до правого нижнего,
      * происходит смещение на половину ширины деления шкалы. Данное поле нивелирует это смещение.
@@ -89,9 +90,8 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     override fun Canvas.drawProgress() {
 
-//        drawTestHelpers()
-        drawText()
         drawRadialSpeedometer()
+        speedometerText?.let { drawText(it) }
     }
 
     override fun onAttachedToWindow() {
@@ -163,34 +163,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         return sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
     }
 
-    private fun Canvas.drawText() {
-
-        drawText("Сижу пержу)))", circleCenter, circleCenter, textPaint)
-    }
-
-
-
-    private val testRect = RectF(bigDivisionHeight / 2, bigDivisionHeight / 2, viewWidth.toFloat() - bigDivisionHeight / 2f, viewHeight.toFloat() - bigDivisionHeight / 2f)
-
-    private fun Canvas.drawTestHelpers() {
-
-        drawTestRadialArcs()
-        drawTestCenterLines()
-    }
-
-    private fun Canvas.drawTestCenterLines() {
-
-        drawLine(bigDivisionHeight / 2, circleRadius + bigDivisionHeight / 2, 2 * circleRadius + bigDivisionHeight / 2, circleRadius + bigDivisionHeight / 2, Paint().apply { color = Color.BLACK })
-        drawLine(circleRadius + bigDivisionHeight / 2, bigDivisionHeight / 2, circleRadius + bigDivisionHeight / 2, 2 * circleRadius + bigDivisionHeight / 2, Paint().apply { color = Color.BLACK })
-    }
-
-    private fun Canvas.drawTestRadialArcs() {
-
-        val progressSweepAngle = ARC_ANGLE_LENGTH * progress / MAX_PROGRESS_VALUE
-
-        drawArc(testRect, ARC_START_ANGLE, ARC_ANGLE_LENGTH, false, backgroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = divisionWidth })
-        drawArc(testRect, ARC_START_ANGLE, progressSweepAngle, false, foregroundPaint.apply { strokeCap = Paint.Cap.SQUARE; strokeWidth = divisionWidth })
-    }
+    private fun Canvas.drawText(text: String) = drawText(text, circleCenter, circleCenter, textPaint)
 }
 
 // todo: добавить отрисовку текста
