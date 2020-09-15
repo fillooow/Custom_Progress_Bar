@@ -57,10 +57,15 @@ abstract class BaseProgressView @JvmOverloads constructor(
         get() = progress
         set(value) = with(animator) {
 
+            specifiedProgress = value
+
             setFloatValues(value)
             start()
         }
 
+    /**
+     * Значение прогресса на данный момент (изменяется во время отрисовки прогресса)
+     */
     var progress = 0f
         set(value) {
             field = value.coerceIn(
@@ -69,6 +74,12 @@ abstract class BaseProgressView @JvmOverloads constructor(
             )
             invalidate()
         }
+
+    /**
+     * Хранит конечное (до последующего изменения пользователем) значение
+     * прогресса, к отрисовке этого значения стремится наследник [BaseProgressView]
+     */
+    protected var specifiedProgress = 0f
 
     protected val resolvedStrokeWidth by lazy { resources.getDimensionPixelSize(strokeWidthResId) }
 
@@ -105,7 +116,8 @@ abstract class BaseProgressView @JvmOverloads constructor(
 
             if (cachedForegroundPaintColorResId != foregroundPaintColorResId) {
 
-                cachedForegroundPaint!!.color = getColor(foregroundPaintColorResId)
+                cachedForegroundPaintColorResId = foregroundPaintColorResId
+                cachedForegroundPaint!!.color = getColor(cachedForegroundPaintColorResId!!)
             }
 
             return cachedForegroundPaint!!
