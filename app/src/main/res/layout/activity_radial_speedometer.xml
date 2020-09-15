@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <fillooow.app.customprogressbar.custom_view.radial.RadialSpeedometerProgressView
-            android:id="@+id/linear_speedometer"
+            android:id="@+id/radial_speedometer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
@@ -38,6 +38,40 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label" />
+
+        <TextView
+            android:id="@+id/activity_radial_text_input_symbols"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_input_numbers"
+            android:gravity="center"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radial_speedometer" />
+
+        <EditText
+            android:id="@+id/radial_activity_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:inputType="text"
+            android:text="@={vm.editTextCharacters}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_radial_text_input_symbols" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:onClick="@{(v) -> vm.onStartAnimationClick(v)}"
+            android:text="@string/start_animation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radial_activity_et" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
