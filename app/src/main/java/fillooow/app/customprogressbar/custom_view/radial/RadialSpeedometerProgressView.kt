@@ -34,7 +34,6 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     override val strokeWidthResId: Int = R.dimen.radial_speedometer_progress_bar_stroke_width
     override val backgroundPaintColorResId: Int = R.color.kit_grey_300
-    override val foregroundPaintColorResId: Int = R.color.kit_brand
 
     override val bigDivisionHeight = asPixels(R.dimen.radial_speedometer_progress_bar_big_division_height)
     override val regularDivisionHeight = asPixels(R.dimen.radial_speedometer_progress_bar_regular_division_height)
@@ -106,6 +105,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     private fun Canvas.drawRadialSpeedometer() {
 
+        mapProgressColorResIdAtRangePairs()
         divisionPaint.color = foregroundPaint.color
 
         for (divisionPosition in divisionsRange) {

@@ -5,6 +5,8 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
+import androidx.annotation.ColorRes
+import fillooow.app.customprogressbar.R
 import kotlin.math.roundToInt
 
 /**
@@ -25,9 +27,17 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
 ) : BaseProgressView(context, attrs, defStyleAttr) {
 
     /**
+     * Публичная переменная, с помощью которой можно
+     * менять цвет шкалы деления прогресса
+     */
+    @ColorRes
+    var progressColorResId: Int = R.color.kit_success
+
+    override val foregroundPaintColorResId: Int
+        get() = progressColorResId
+
+    /**
      * Количество видимых (рисуемых) шкал делений спидометра.
-     *
-     * [Float] - дабы избегать излишних операций приведения типа при расчетах.
      */
     protected abstract val visibleDivisions: Int
 
@@ -73,7 +83,21 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
     private fun Canvas.drawDivision(divisionRect: RectF) {
         drawRoundRect(divisionRect, divisionRadius, divisionRadius, divisionPaint)
     }
+
+    var colorAtProgressRangePairs: List<ColorAtProgressRangePair> = emptyList()
+
+     fun mapProgressColorResIdAtRangePairs() {
+
+         for (pair in colorAtProgressRangePairs) {
+
+            if (specifiedProgress in pair.progressRange()) {
+                progressColorResId = pair.colorRes()
+            }
+        }
+    }
 }
 
-// todo: биндинг адаптер для смены цвета
-// для этого надо создать еще одну переменную для колор рес айди
+private fun Pair<ClosedFloatingPointRange<Float>, Int>.progressRange() = first
+private fun Pair<ClosedFloatingPointRange<Float>, Int>.colorRes() = second
+
+typealias ColorAtProgressRangePair = Pair<ClosedFloatingPointRange<Float>, Int>

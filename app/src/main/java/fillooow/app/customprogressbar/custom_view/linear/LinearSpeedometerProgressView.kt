@@ -20,7 +20,6 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
 
     override val strokeWidthResId: Int = R.dimen.linear_speedometer_progress_bar_stroke_width
     override val backgroundPaintColorResId: Int = R.color.kit_grey_300
-    override val foregroundPaintColorResId: Int = R.color.kit_brand
 
     override val visibleDivisions = 27
     override val divisionRadius = asPixels(R.dimen.linear_speedometer_progress_bar_division_radius)
@@ -67,6 +66,7 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
 
         save()
 
+        mapProgressColorResIdAtRangePairs()
         divisionPaint.color = foregroundPaint.color
 
         for (divisionPosition in divisionsRange) {
