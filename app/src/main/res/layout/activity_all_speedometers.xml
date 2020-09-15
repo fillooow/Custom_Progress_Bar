@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:animatedProgress="@{vm.progress}"
+            app:animatedProgress="@{vm.linearProgress}"
             app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

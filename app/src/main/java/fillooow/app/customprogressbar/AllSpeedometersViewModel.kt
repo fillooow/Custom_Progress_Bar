@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 
 class AllSpeedometersViewModel : ViewModel() {
 
-    val progress = MutableLiveData<Float>(0f)
+    val linearProgress = MutableLiveData<Float>(0f)
     val radialProgress = MutableLiveData<Float>(0f)
 
     val colorAtProgressRangePairs = listOf(
