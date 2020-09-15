@@ -1,9 +1,11 @@
 package fillooow.app.customprogressbar
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import fillooow.app.customprogressbar.databinding.ActivityLinearSpeedometerBinding
 import kotlinx.coroutines.CoroutineScope
@@ -21,6 +23,15 @@ class LinearSpeedometerActivity : AppCompatActivity() {
 
         binding.vm = viewModel
         binding.lifecycleOwner = this
+
+        viewModel.shouldShowNumberFormatExceptionToast.observe(this, Observer { status ->
+            if (status == true) {
+
+                viewModel.shouldShowNumberFormatExceptionToast.value = false
+
+                showToast("Проверьте числа, похоже, они введены неверно")
+            }
+        })
     }
 
 
@@ -45,4 +56,6 @@ class LinearSpeedometerActivity : AppCompatActivity() {
         delay(800)
         viewModel.linearProgress.value = 40f
     }
+
+    private fun showToast(text: String) = Toast.makeText(this, text, Toast.LENGTH_LONG).show()
 }
