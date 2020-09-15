@@ -9,7 +9,6 @@ import androidx.annotation.DimenRes
 import androidx.core.view.updateLayoutParams
 import fillooow.app.customprogressbar.R
 import fillooow.app.customprogressbar.custom_view.base.BaseSpeedometerProgressView
-import fillooow.app.customprogressbar.custom_view.extension.createPaint
 import fillooow.app.customprogressbar.custom_view.extension.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
@@ -79,31 +78,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         isAntiAlias = true
     }
 
-    private val textPaint = createPaint(context, R.color.kit_primary) {
-
-        // fixme: поменять ресурс на рабочем коде
-        textSize = resources.getDimensionPixelSize(R.dimen.linear_speedometer_progress_bar_division_radius).toFloat()
-        textAlign = Paint.Align.CENTER
-    }
-
     override fun Canvas.drawProgress() {
-
-        drawRadialSpeedometer()
-        speedometerText?.let { drawText(it) }
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-
-        updateLayoutParams {
-            width = viewWidth
-            height = viewHeight
-        }
-    }
-
-    private fun asPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
-
-    private fun Canvas.drawRadialSpeedometer() {
 
         mapProgressColorResIdAtRangePairs()
         divisionPaint.color = foregroundPaint.color
@@ -134,6 +109,17 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         }
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+
+        updateLayoutParams {
+            width = viewWidth
+            height = viewHeight
+        }
+    }
+
+    private fun asPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
+
     /**
      * Рассчитывает смещение по окружности для X координаты
      * по номеру позиции деления шкалы.
@@ -161,6 +147,4 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
         return sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
     }
-
-    private fun Canvas.drawText(text: String) = drawText(text, circleCenter, circleCenter, textPaint)
 }
