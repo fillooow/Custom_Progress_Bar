@@ -16,49 +16,35 @@
         android:screenOrientation="portrait"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/linear_speedometer_label"
+        <Button
+            android:id="@+id/activity_main_btn_to_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:text="@string/linear_speedometer_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/activity_main_btn_to_radial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="@string/linear_speedometer_label"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <fillooow.app.customprogressbar.custom_view.linear.LinearSpeedometerProgressView
-            android:id="@+id/linear_speedometer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:animatedProgress="@{vm.progress}"
-            app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linear_speedometer_label" />
-
-        <TextView
-            android:id="@+id/radial_speedometer_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
             android:text="@string/radial_speedometer_label"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linear_speedometer" />
+            app:layout_constraintTop_toBottomOf="@id/activity_main_btn_to_linear" />
 
-        <fillooow.app.customprogressbar.custom_view.radial.RadialSpeedometerProgressView
+        <Button
+            android:id="@+id/activity_main_btn_to_both"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:animatedProgress="@{vm.radialProgress}"
-            app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
+            android:layout_marginTop="40dp"
+            android:text="@string/btn_to_both_speedometers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label" />
+            app:layout_constraintTop_toBottomOf="@id/activity_main_btn_to_radial" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
