@@ -13,6 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:screenOrientation="portrait"
         tools:context=".AllSpeedometersActivity">
 
         <TextView
@@ -30,10 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
             app:animatedProgress="@{vm.progress}"
+            app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
             android:id="@+id/radial_speedometer_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:gravity="center"
             android:text="@string/radial_speedometer_label"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,8 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
             app:animatedProgress="@{vm.radialProgress}"
+            app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label" />
