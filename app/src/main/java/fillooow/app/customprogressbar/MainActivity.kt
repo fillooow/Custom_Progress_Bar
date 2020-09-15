@@ -32,14 +32,14 @@ class MainActivity : AppCompatActivity() {
     private fun testRadialSpeedometerProgressView() = CoroutineScope(viewModel.viewModelScope.coroutineContext).launch {
 
         delay(800)
-        viewModel.radialProgress.value = 24f
+        viewModel.radialProgress.value = 25f
 //
         delay(800)
-        viewModel.radialProgress.value = 49f
+        viewModel.radialProgress.value = 50f
 //
         delay(800)
         viewModel.radialProgress.value = 20f
-//
+
 //        for (i in (0 .. 52)) {
 //
 //            delay(300)

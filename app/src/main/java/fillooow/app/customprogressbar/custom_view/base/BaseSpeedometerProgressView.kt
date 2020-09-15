@@ -92,6 +92,7 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
 
             if (specifiedProgress in pair.progressRange()) {
                 progressColorResId = pair.colorRes()
+                return
             }
         }
     }
