@@ -5,6 +5,6 @@
     <string name="linear_speedometer_label">Linear Speedometer</string>
     <string name="radial_speedometer_label">Radial Speedometer</string>
 
-    <string name="btn_to_both_speedometers">Both Speedometers</string>
+    <string name="btn_to_all_speedometers">All Speedometers</string>
 
 </resources>

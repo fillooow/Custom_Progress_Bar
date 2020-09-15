@@ -1,12 +1,11 @@
 package fillooow.app.customprogressbar
 
-import androidx.lifecycle.MutableLiveData
+import android.content.Context
+import android.content.Intent
+import android.view.View
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-
-    val progress = MutableLiveData<Float>(0f)
-    val radialProgress = MutableLiveData<Float>(0f)
 
     val colorAtProgressRangePairs = listOf(
 
@@ -15,4 +14,10 @@ class MainViewModel : ViewModel() {
         50f .. 100f to R.color.kit_alert,
         25f .. 0f to R.color.kit_brand
     )
+
+    fun toLinearSpeedometer(view: View) = view.context.startActivityIntent(LinearSpeedometerActivity::class.java)
+    fun toRadialSpeedometer(view: View) = view.context.startActivityIntent(RadialSpeedometerActivity::class.java)
+    fun toAllSpeedometers(view: View) = view.context.startActivityIntent(AllSpeedometersActivity::class.java)
+
+    private fun Context.startActivityIntent(activity: Class<out Any>) = startActivity(Intent(this, activity))
 }
