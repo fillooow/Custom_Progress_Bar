@@ -5,10 +5,10 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
-import androidx.annotation.DimenRes
 import androidx.core.view.updateLayoutParams
 import fillooow.app.customprogressbar.R
 import fillooow.app.customprogressbar.custom_view.base.BaseSpeedometerProgressView
+import fillooow.app.customprogressbar.custom_view.extension.getPixels
 
 class LinearSpeedometerProgressView @JvmOverloads constructor(
 
@@ -22,11 +22,11 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     override val backgroundPaintColorResId: Int = R.color.kit_grey_300
 
     override val visibleDivisions = 27
-    override val divisionRadius = asPixels(R.dimen.linear_speedometer_progress_bar_division_radius)
+    override val divisionRadius = getPixels(R.dimen.linear_speedometer_progress_bar_division_radius)
 
-    override val regularDivisionHeight = asPixels(R.dimen.linear_speedometer_progress_bar_regular_division_height)
-    override val bigDivisionHeight = asPixels(R.dimen.linear_speedometer_progress_bar_big_division_height)
-    override val divisionWidth = asPixels(R.dimen.linear_speedometer_progress_bar_division_width)
+    override val regularDivisionHeight = getPixels(R.dimen.linear_speedometer_progress_bar_regular_division_height)
+    override val bigDivisionHeight = getPixels(R.dimen.linear_speedometer_progress_bar_big_division_height)
+    override val divisionWidth = getPixels(R.dimen.linear_speedometer_progress_bar_division_width)
 
     override val regularItemTopOffset = (bigDivisionHeight - regularDivisionHeight) / 2
 
@@ -87,8 +87,6 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
         }
         restore()
     }
-
-    private fun asPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
 
     /**
      * Считает расстояние между делениями шкал в зависимости от ширины экрана

@@ -5,10 +5,10 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
-import androidx.annotation.DimenRes
 import androidx.core.view.updateLayoutParams
 import fillooow.app.customprogressbar.R
 import fillooow.app.customprogressbar.custom_view.base.BaseSpeedometerProgressView
+import fillooow.app.customprogressbar.custom_view.extension.getPixels
 import fillooow.app.customprogressbar.custom_view.extension.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
@@ -62,12 +62,16 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
      */
     private val divisionLeftTopCornerFromCenterOffset = bigDivisionHeight / 2 + circleRadius
 
-    override val bigDivision = RectF(- horizontalDivisionOffset, 0f,
-                                     divisionWidth - horizontalDivisionOffset, bigDivisionHeight)
+    override val bigDivision = RectF(
+        -horizontalDivisionOffset, 0f,
+        divisionWidth - horizontalDivisionOffset, bigDivisionHeight
+    )
 
-    override val regularDivision = RectF(- horizontalDivisionOffset, regularItemTopOffset,
-                                         divisionWidth - horizontalDivisionOffset,
-                                         regularDivisionHeight + regularItemTopOffset)
+    override val regularDivision = RectF(
+        -horizontalDivisionOffset, regularItemTopOffset,
+        divisionWidth - horizontalDivisionOffset,
+        regularDivisionHeight + regularItemTopOffset
+    )
 
     override val divisionPaint = Paint().apply {
 
@@ -116,8 +120,6 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         }
     }
 
-    private fun getPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
-
     /**
      * Рассчитывает смещение по окружности для X координаты
      * по номеру позиции деления шкалы.
@@ -138,11 +140,11 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     private fun calculateRadiansOffsetByPositionX(divisionPosition: Int): Float {
 
-        return cos((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
+        return cos(toRadians(ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)))
     }
 
     private fun calculateRadiansOffsetByPositionY(divisionPosition: Int): Float {
 
-        return sin((ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)).toRadians())
+        return sin(toRadians(ARC_START_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1)))
     }
 }
