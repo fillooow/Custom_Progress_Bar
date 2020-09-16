@@ -30,19 +30,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <fillooow.app.customprogressbar.custom_view.radial.RadialSpeedometerProgressView
-                android:id="@+id/radial_speedometer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                app:animatedProgress="@{vm.radialProgress}"
-                app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label" />
-
             <fillooow.app.customprogressbar.custom_view.radial.TochkaRadialSpeedometerView
                 android:id="@+id/activity_radial_speedometer_view"
                 android:layout_width="wrap_content"
@@ -52,7 +39,7 @@
                 app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radial_speedometer"
+                app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label"
                 app:speedometerText="@{vm.speedometerText}"
                 tools:text="немного немного немного немного немного текста" />
 
