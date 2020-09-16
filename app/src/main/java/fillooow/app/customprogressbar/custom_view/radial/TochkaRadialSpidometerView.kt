@@ -3,7 +3,6 @@ package fillooow.app.customprogressbar.custom_view.radial
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import fillooow.app.customprogressbar.R
 import fillooow.app.customprogressbar.custom_view.base.ColorAtProgressRangePair
@@ -18,6 +17,9 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 
 ) : FrameLayout(context, attrs, defStyleAttr) {
+
+    private val viewWidth = resources.getDimensionPixelSize(R.dimen.radial_speedometer_progress_bar_width)
+    private val viewHeight = resources.getDimensionPixelSize(R.dimen.radial_speedometer_progress_bar_height)
 
     var speedometerText: String
         get() = radialSpeedometerTextView.text?.toString() ?: ""
@@ -58,8 +60,8 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
         super.onAttachedToWindow()
 
         layoutParams.apply {
-            width = ViewGroup.LayoutParams.WRAP_CONTENT
-            height = ViewGroup.LayoutParams.WRAP_CONTENT
+            width = viewWidth
+            height = viewHeight
         }
     }
 

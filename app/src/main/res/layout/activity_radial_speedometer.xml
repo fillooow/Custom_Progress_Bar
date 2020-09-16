@@ -47,21 +47,22 @@
                 android:id="@+id/activity_radial_speedometer_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:speedometerText="@{vm.speedometerText}"
+                android:layout_marginTop="40dp"
                 app:animatedProgress="@{vm.radialProgress}"
                 app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
-                android:layout_marginTop="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radial_speedometer"/>
+                app:layout_constraintTop_toBottomOf="@id/radial_speedometer"
+                app:speedometerText="@{vm.speedometerText}"
+                tools:text="немного немного немного немного немного текста" />
 
             <TextView
                 android:id="@+id/activity_radial_text_input_symbols"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/hint_input_numbers"
-                android:gravity="center"
                 android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="@string/hint_input_numbers"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

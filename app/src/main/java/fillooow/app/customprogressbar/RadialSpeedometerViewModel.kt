@@ -34,6 +34,7 @@ class RadialSpeedometerViewModel : ViewModel() {
                 progressValues.forEach {
                     delay(800)
                     radialProgress.value = it
+                    speedometerText.value = textList.random()
                 }
             } catch (error: NumberFormatException) {
 
@@ -41,4 +42,13 @@ class RadialSpeedometerViewModel : ViewModel() {
             }
         }
     }
+
+    private val textList = listOf(
+        "Беспокоиться не о чем",
+        "Нет операций",
+        "Стоит обратить внимание",
+        "Возможны лимиты или запрос",
+        "Установлены лимиты",
+        "Установлены ограничения"
+    )
 }
