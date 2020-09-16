@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--AG 700-->
+
+    <dimen name="tochka_text_view_ag_700_7xl_size">72dp</dimen>
+    <dimen name="tochka_text_view_ag_700_7xl_line_spacing_extra">7dp</dimen>
+
+    <dimen name="tochka_text_view_ag_700_6xl_size">60dp</dimen>
+    <dimen name="tochka_text_view_ag_700_6xl_line_spacing_extra">6dp</dimen>
+
+    <dimen name="tochka_text_view_ag_700_5xl_size">48dp</dimen>
+    <dimen name="tochka_text_view_ag_700_5xl_line_spacing_extra">5dp</dimen>
+
+    <dimen name="tochka_text_view_ag_700_4xl_size">40dp</dimen>
+    <dimen name="tochka_text_view_ag_700_4xl_line_spacing_extra">4dp</dimen>
+
+    <dimen name="tochka_text_view_ag_700_3xl_size">34dp</dimen>
+    <dimen name="tochka_text_view_ag_700_3xl_line_spacing_extra">5dp</dimen>
+
+    <dimen name="tochka_text_view_ag_700_2xl_size">28dp</dimen>
+    <dimen name="tochka_text_view_ag_700_2xl_line_spacing_extra">6dp</dimen>
+
+    <dimen name="tochka_text_view_ag_700_xl_size">20dp</dimen>
+    <dimen name="tochka_text_view_ag_700_xl_line_spacing_extra">4dp</dimen>
+
+    <!--Text-->
+
+    <dimen name="tochka_text_view_content_line_spacing_extra">0dp</dimen>
+
+    <dimen name="tochka_text_view_3xl_size">30dp</dimen>
+    <dimen name="tochka_text_view_2xl_size">24dp</dimen>
+    <dimen name="tochka_text_view_xl_size">20dp</dimen>
+    <dimen name="tochka_text_view_l_size">18dp</dimen>
+    <dimen name="tochka_text_view_m_size">16dp</dimen>
+    <dimen name="tochka_text_view_s_size">14dp</dimen>
+    <dimen name="tochka_text_view_xs_size">12dp</dimen>
+
+</resources>

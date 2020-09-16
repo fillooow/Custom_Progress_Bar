@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Wildcard attributes -->
+
+    <attr name="text" format="string" />
+    <attr name="title" format="string" />
+    <attr name="iconColor" format="reference" />
+    <attr name="iconResId" format="reference" />
+
+    <attr name="showLoading" format="boolean" />
+
+    <attr name="iconDrawable" format="reference" />
+    <attr name="iconTintRes" format="reference" />
+
+    <!-- Global attributes -->
+
+    <declare-styleable name="GlobalAttributes">
+
+        <attr name="textColor" format="color" />
+        <attr name="hintText" format="string" />
+
+        <attr name="currency" format="enum">
+            <enum name="RUB" value="0" />
+            <enum name="EUR" value="1" />
+            <enum name="USD" value="2" />
+            <enum name="CNY" value="3" />
+            <enum name="GBP" value="4" />
+            <enum name="PLN" value="5" />
+        </attr>
+
+        <attr name="viewStyle" format="enum">
+            <enum name="AG700_7XL" value="0" />
+            <enum name="AG700_6XL" value="1" />
+            <enum name="AG700_5XL" value="2" />
+            <enum name="AG700_4XL" value="3" />
+            <enum name="AG700_3XL" value="4" />
+            <enum name="AG700_2XL" value="5" />
+            <enum name="AG700_XL" value="6" />
+
+            <enum name="TS500_3XL" value="7" />
+            <enum name="TS500_2XL" value="8" />
+            <enum name="TS500_XL" value="9" />
+            <enum name="TS500_L" value="10" />
+            <enum name="TS500_M" value="11" />
+            <enum name="TS500_S" value="12" />
+            <enum name="TS500_XS" value="13" />
+
+            <enum name="TS400_3XL" value="14" />
+            <enum name="TS400_2XL" value="15" />
+            <enum name="TS400_XL" value="16" />
+            <enum name="TS400_L" value="17" />
+            <enum name="TS400_M" value="18" />
+            <enum name="TS400_S" value="19" />
+            <enum name="TS400_XS" value="20" />
+
+            <enum name="TS700_3XL" value="21" />
+            <enum name="TS700_2XL" value="22" />
+            <enum name="TS700_XL" value="23" />
+            <enum name="TS700_L" value="24" />
+            <enum name="TS700_M" value="25" />
+            <enum name="TS700_S" value="26" />
+            <enum name="TS700_XS" value="27" />
+        </attr>
+
+    </declare-styleable>
+</resources>

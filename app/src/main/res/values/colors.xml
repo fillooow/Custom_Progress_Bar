@@ -6,8 +6,27 @@
 
     <color name="kit_primary">#333333</color>
     <color name="kit_brand">#7658E0</color>
+
+    <color name="kit_grey_400">#B2B2B2</color>
     <color name="kit_grey_300">#E1E1E1</color>
+    <color name="kit_grey_200">#EEEEEE</color>
+    <color name="kit_grey_100">#F6F6F6</color>
+
     <color name="kit_success">#48AC98</color>
     <color name="kit_alert">#D74B4B</color>
     <color name="kit_warning">#FFCC3D</color>
+
+    <integer name="alpha_85">216</integer>
+    <integer name="alpha_75">191</integer>
+    <integer name="alpha_70">178</integer>
+    <integer name="alpha_50">127</integer>
+    <integer name="alpha_40">102</integer>
+    <integer name="alpha_30">77</integer>
+    <integer name="alpha_25">64</integer>
+    <integer name="alpha_20">51</integer>
+    <integer name="alpha_15">38</integer>
+    <integer name="alpha_10">26</integer>
+    <integer name="alpha_5">13</integer>
+    <integer name="alpha_2">5</integer>
+    <integer name="alpha_0">0</integer>
 </resources>

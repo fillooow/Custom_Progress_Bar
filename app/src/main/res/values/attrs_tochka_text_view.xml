@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TochkaTextView">
+
+        <attr name="textColorAlpha" format="integer" />
+
+        <attr name="removeDanglingPrepositions" format="boolean" />
+        <!--Выставить false если нужен стиль Anglecia Content-->
+        <attr name="useStyleLineSpacing" format="boolean" />
+        <attr name="blurAmount" format="boolean" />
+    </declare-styleable>
+
+</resources>

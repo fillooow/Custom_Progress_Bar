@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="space_1">5dp</dimen>
+    <dimen name="space_2">10dp</dimen>
+    <dimen name="space_3">15dp</dimen>
+    <dimen name="space_4">20dp</dimen>
+    <dimen name="space_5">25dp</dimen>
+    <dimen name="space_6">30dp</dimen>
+    <dimen name="space_7">35dp</dimen>
+    <dimen name="space_8">40dp</dimen>
+    <dimen name="space_9">45dp</dimen>
+    <dimen name="space_10">50dp</dimen>
+    <dimen name="space_11">55dp</dimen>
+    <dimen name="space_12">60dp</dimen>
+    <dimen name="space_13">65dp</dimen>
+    <dimen name="space_14">70dp</dimen>
+    <dimen name="space_15">75dp</dimen>
+    <dimen name="space_16">80dp</dimen>
+    <dimen name="space_18">90dp</dimen>
+    <dimen name="space_19">95dp</dimen>
+    <dimen name="space_20">100dp</dimen>
+    <dimen name="space_21">105dp</dimen>
+    <dimen name="space_23">115dp</dimen>
+    <dimen name="space_24">120dp</dimen>
+    <dimen name="space_25">125dp</dimen>
+    <dimen name="space_26">130dp</dimen>
+    <dimen name="space_28">140dp</dimen>
+    <dimen name="space_30">150dp</dimen>
+    <dimen name="space_32">160dp</dimen>
+    <dimen name="space_40">200dp</dimen>
+
+    <dimen name="negative_space_1">-5dp</dimen>
+    <dimen name="negative_space_2">-10dp</dimen>
+    <dimen name="negative_space_3">-15dp</dimen>
+    <dimen name="negative_space_4">-20dp</dimen>
+    <dimen name="negative_space_5">-25dp</dimen>
+    <dimen name="negative_space_10">-50dp</dimen>
+    <dimen name="negative_space_20">-100dp</dimen>
+    <dimen name="negative_space_60">-300dp</dimen>
+
+</resources>
