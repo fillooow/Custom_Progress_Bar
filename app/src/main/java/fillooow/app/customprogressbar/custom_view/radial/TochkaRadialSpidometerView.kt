@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import fillooow.app.customprogressbar.R
 import fillooow.app.customprogressbar.custom_view.base.ColorAtProgressRangePair
 import fillooow.app.customprogressbar.custom_view.extension.applyStyleable
+import fillooow.app.customprogressbar.custom_view.extension.getColor
 import fillooow.app.customprogressbar.custom_view.extension.inflateAndAttach
 import kotlinx.android.synthetic.main.tochka_radial_speedometer_view.view.*
 
@@ -17,9 +18,6 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 
 ) : FrameLayout(context, attrs, defStyleAttr) {
-
-    private val viewWidth = resources.getDimensionPixelSize(R.dimen.radial_speedometer_progress_bar_width)
-    private val viewHeight = resources.getDimensionPixelSize(R.dimen.radial_speedometer_progress_bar_height)
 
     var speedometerText: String
         get() = radialSpeedometerTextView.text?.toString() ?: ""
@@ -38,6 +36,7 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
         set(value) {
 
             radialSpeedometerProgressView.animatedProgress = value
+            mapTextColorByProgress(value)
         }
 
     var colorAtProgressRangePairs: List<ColorAtProgressRangePair>
@@ -49,6 +48,9 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
 
     private val radialSpeedometerTextView by lazy { tochka_radial_speedometer_view_text }
     private val radialSpeedometerProgressView by lazy { tochka_radial_speedometer_progress_view }
+
+    private val viewWidth = resources.getDimensionPixelSize(R.dimen.radial_speedometer_progress_bar_width)
+    private val viewHeight = resources.getDimensionPixelSize(R.dimen.radial_speedometer_progress_bar_height)
 
     init {
 
@@ -68,5 +70,14 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
     private fun applyAttrs(typedArray: TypedArray) = with(typedArray) {
 
         speedometerText = getString(R.styleable.TochkaRadialSpeedometerView_speedometerText) ?: ""
+    }
+
+    private fun mapTextColorByProgress(progress: Float) {
+
+        radialSpeedometerTextView.textColor = when (progress) {
+
+            0f -> getColor(R.color.kit_grey_400)
+            else -> getColor(R.color.kit_primary)
+        }
     }
 }

@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class RadialSpeedometerViewModel : ViewModel() {
 
-    val speedometerText = MutableLiveData("сосиска")
+    val speedometerText = MutableLiveData("Нет операций")
 
     var shouldShowNumberFormatExceptionToast = MutableLiveData<Boolean>(false)
 
