@@ -10,68 +10,86 @@
             type="fillooow.app.customprogressbar.RadialSpeedometerViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:screenOrientation="portrait"
-        tools:context=".LinearSpeedometerActivity">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/radial_speedometer_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="@string/radial_speedometer_label"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <fillooow.app.customprogressbar.custom_view.radial.RadialSpeedometerProgressView
-            android:id="@+id/radial_speedometer"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            app:animatedProgress="@{vm.radialProgress}"
-            app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label" />
+            android:screenOrientation="portrait"
+            tools:context=".LinearSpeedometerActivity">
 
-        <TextView
-            android:id="@+id/activity_radial_text_input_symbols"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/hint_input_numbers"
-            android:gravity="center"
-            android:layout_marginTop="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radial_speedometer" />
+            <TextView
+                android:id="@+id/radial_speedometer_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/radial_speedometer_label"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/radial_activity_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:inputType="text"
-            android:text="@={vm.editTextCharacters}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/activity_radial_text_input_symbols" />
+            <fillooow.app.customprogressbar.custom_view.radial.RadialSpeedometerProgressView
+                android:id="@+id/radial_speedometer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                app:animatedProgress="@{vm.radialProgress}"
+                app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:onClick="@{(v) -> vm.onStartAnimationClick(v)}"
-            android:text="@string/start_animation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radial_activity_et" />
+            <fillooow.app.customprogressbar.custom_view.radial.TochkaRadialSpeedometerView
+                android:id="@+id/activity_radial_speedometer_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:speedometerText="@{vm.speedometerText}"
+                app:animatedProgress="@{vm.radialProgress}"
+                app:colorAtProgressRangePairs="@{vm.colorAtProgressRangePairs}"
+                android:layout_marginTop="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radial_speedometer"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/activity_radial_text_input_symbols"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hint_input_numbers"
+                android:gravity="center"
+                android:layout_marginTop="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_radial_speedometer_view" />
+
+            <EditText
+                android:id="@+id/radial_activity_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:inputType="text"
+                android:text="@={vm.editTextCharacters}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_radial_text_input_symbols" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:onClick="@{(v) -> vm.onStartAnimationClick(v)}"
+                android:text="@string/start_animation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radial_activity_et" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </layout>

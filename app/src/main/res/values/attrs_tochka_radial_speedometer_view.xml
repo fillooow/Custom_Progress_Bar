@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TochkaRadialSpeedometerView">
+
+        <attr name="speedometerText" format="string" />
+        <attr name="animatedProgress" format="float" />
+        <attr name="colorAtProgressRangePairs" format="reference" />
+
+    </declare-styleable>
+</resources>

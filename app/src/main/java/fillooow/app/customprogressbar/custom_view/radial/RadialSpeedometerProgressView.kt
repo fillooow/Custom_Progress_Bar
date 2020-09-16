@@ -50,8 +50,6 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     private val circleCenter = viewHeight / 2f
     private val circleRadius = viewHeight / 2f - bigDivisionHeight / 2f
 
-    private var speedometerText: String? = null
-
     /**
      * Так как прямоугольник [RectF] рисуется от левого верхнего угла до правого нижнего,
      * происходит смещение на половину ширины деления шкалы. Данное поле нивелирует это смещение.
