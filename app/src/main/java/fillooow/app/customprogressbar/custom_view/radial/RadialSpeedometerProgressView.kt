@@ -34,9 +34,9 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     override val strokeWidthResId: Int = R.dimen.radial_speedometer_progress_bar_stroke_width
     override val backgroundPaintColorResId: Int = R.color.kit_grey_300
 
-    override val bigDivisionHeight = asPixels(R.dimen.radial_speedometer_progress_bar_big_division_height)
-    override val regularDivisionHeight = asPixels(R.dimen.radial_speedometer_progress_bar_regular_division_height)
-    override val divisionWidth = asPixels(R.dimen.radial_speedometer_progress_bar_division_width)
+    override val bigDivisionHeight = getPixels(R.dimen.radial_speedometer_progress_bar_big_division_height)
+    override val regularDivisionHeight = getPixels(R.dimen.radial_speedometer_progress_bar_regular_division_height)
+    override val divisionWidth = getPixels(R.dimen.radial_speedometer_progress_bar_division_width)
 
     override val regularItemTopOffset = (bigDivisionHeight - regularDivisionHeight) / 2
 
@@ -45,7 +45,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     override val bigDivisionPeriodicity = 13
 
-    override val divisionRadius = asPixels(R.dimen.radial_speedometer_progress_bar_division_radius)
+    override val divisionRadius = getPixels(R.dimen.radial_speedometer_progress_bar_division_radius)
 
     private val circleCenter = viewHeight / 2f
     private val circleRadius = viewHeight / 2f - bigDivisionHeight / 2f
@@ -116,7 +116,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
         }
     }
 
-    private fun asPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
+    private fun getPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
 
     /**
      * Рассчитывает смещение по окружности для X координаты
