@@ -9,6 +9,7 @@ import fillooow.app.customprogressbar.custom_view.base.ColorAtProgressRangePair
 import fillooow.app.customprogressbar.custom_view.extension.applyStyleable
 import fillooow.app.customprogressbar.custom_view.extension.getColor
 import fillooow.app.customprogressbar.custom_view.extension.inflateAndAttach
+import fillooow.app.customprogressbar.custom_view.text.TochkaTextView
 import kotlinx.android.synthetic.main.tochka_radial_speedometer_view.view.*
 
 class TochkaRadialSpeedometerView @JvmOverloads constructor(
@@ -23,20 +24,18 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
         get() = radialSpeedometerTextView.text?.toString() ?: ""
         set(value) {
 
-            if (radialSpeedometerTextView.text == null) {
-                radialSpeedometerTextView.text = value
-                return
-            }
             if (value == radialSpeedometerTextView.text) return
-            radialSpeedometerTextView.text = value
+
+            radialSpeedometerTextView.animateChangeText(value)
         }
 
     var animatedProgress: Float
         get() = radialSpeedometerProgressView.animatedProgress
         set(value) {
 
+            if (value == radialSpeedometerProgressView.animatedProgress) return
+
             radialSpeedometerProgressView.animatedProgress = value
-            mapTextColorByProgress(value)
         }
 
     var colorAtProgressRangePairs: List<ColorAtProgressRangePair>
@@ -72,6 +71,21 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
         speedometerText = getString(R.styleable.TochkaRadialSpeedometerView_speedometerText) ?: ""
     }
 
+    private fun TochkaTextView.animateChangeText(title: String) {
+
+        animate().cancel()
+
+        animate().alpha(0f).setDuration(TEXT_ANIMATION_DURATION).withEndAction {
+
+            text = title
+
+            mapTextColorByProgress(animatedProgress)
+
+            animate().alpha(1f).setDuration(TEXT_ANIMATION_DURATION).start()
+
+        }.start()
+    }
+
     private fun mapTextColorByProgress(progress: Float) {
 
         radialSpeedometerTextView.textColor = when (progress) {
@@ -81,3 +95,5 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
         }
     }
 }
+
+private const val TEXT_ANIMATION_DURATION = 200L
