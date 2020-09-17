@@ -40,7 +40,7 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
         set(value) {
 
             field = value
-            mapProgressColorResIdAtRangePairs()
+            updateProgressColor()
         }
 
     /**
@@ -93,7 +93,7 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
 
     var colorAtProgressRangePairs: List<ColorAtProgressRangePair> = emptyList()
 
-    private fun mapProgressColorResIdAtRangePairs() {
+    private fun updateProgressColor() {
 
         for (pair in colorAtProgressRangePairs) {
 
