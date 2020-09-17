@@ -31,10 +31,17 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
      * менять цвет шкалы деления прогресса
      */
     @ColorRes
-    var progressColorResId: Int = R.color.kit_success
+    var progressColorResId: Int = R.color.kit_brand
 
     override val foregroundPaintColorResId: Int
         get() = progressColorResId
+
+    override var specifiedProgress = 0f
+        set(value) {
+
+            field = value
+            mapProgressColorResIdAtRangePairs()
+        }
 
     /**
      * Количество видимых (рисуемых) шкал делений спидометра.
@@ -86,9 +93,9 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
 
     var colorAtProgressRangePairs: List<ColorAtProgressRangePair> = emptyList()
 
-     fun mapProgressColorResIdAtRangePairs() {
+    private fun mapProgressColorResIdAtRangePairs() {
 
-         for (pair in colorAtProgressRangePairs) {
+        for (pair in colorAtProgressRangePairs) {
 
             if (specifiedProgress in pair.progressRange()) {
                 progressColorResId = pair.colorRes()

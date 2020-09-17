@@ -82,7 +82,6 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     override fun Canvas.drawProgress() {
 
-        mapProgressColorResIdAtRangePairs()
         divisionPaint.color = foregroundPaint.color
 
         for (divisionPosition in divisionsRange) {

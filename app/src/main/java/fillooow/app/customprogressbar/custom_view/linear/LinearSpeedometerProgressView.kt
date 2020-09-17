@@ -66,7 +66,6 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
 
         save()
 
-        mapProgressColorResIdAtRangePairs()
         divisionPaint.color = foregroundPaint.color
 
         for (divisionPosition in divisionsRange) {
