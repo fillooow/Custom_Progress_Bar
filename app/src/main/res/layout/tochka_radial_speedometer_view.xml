@@ -23,7 +23,8 @@
         android:layout_marginBottom="@dimen/space_15"
         android:layout_marginStart="@dimen/space_8"
         android:layout_marginEnd="@dimen/space_8"
+        android:textColor="@color/kit_grey_400"
         app:viewStyle="TS500_XL"
-        tools:text="Возможны лимиты или запрос" />
+        tools:text="Нет операций" />
 
 </merge>

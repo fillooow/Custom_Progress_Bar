@@ -32,7 +32,7 @@ class RadialSpeedometerViewModel : ViewModel() {
                 val progressValues = editTextCharacters.value!!.trim().split(",").map(String::toFloat)
 
                 progressValues.forEach {
-                    delay(800)
+                    delay(1000)
                     radialProgress.value = it
                     speedometerText.value = textList.random()
                 }
@@ -45,7 +45,6 @@ class RadialSpeedometerViewModel : ViewModel() {
 
     private val textList = listOf(
         "Беспокоиться не о чем",
-        "Нет операций",
         "Стоит обратить внимание",
         "Возможны лимиты или запрос",
         "Установлены лимиты",

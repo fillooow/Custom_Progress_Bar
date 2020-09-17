@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 
-
 internal inline val ViewGroup.inflater: LayoutInflater
     get() = LayoutInflater.from(context)
 
