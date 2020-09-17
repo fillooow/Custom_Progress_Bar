@@ -5,7 +5,7 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import fillooow.app.customprogressbar.R
-import fillooow.app.customprogressbar.custom_view.base.ColorAtProgressRangePair
+import fillooow.app.customprogressbar.custom_view.base.model.ColorAtProgressRangePair
 import fillooow.app.customprogressbar.custom_view.extension.applyStyleable
 import fillooow.app.customprogressbar.custom_view.extension.getColor
 import fillooow.app.customprogressbar.custom_view.extension.inflateAndAttach

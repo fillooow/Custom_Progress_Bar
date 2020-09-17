@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import fillooow.app.customprogressbar.custom_view.base.model.ColorAtProgressRangePair
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.random.Random
@@ -16,17 +17,27 @@ private const val ALL_VALUES_ANIMATION_TIME = (VISIBLE_DIVISIONS_RADIAL + 1) * (
 class AllSpeedometersViewModel : ViewModel() {
 
     var isTestAllLinearBtnEnabled = MutableLiveData(false)
-    var isTestAllRadialBtnEnabled  = MutableLiveData(false)
+    var isTestAllRadialBtnEnabled = MutableLiveData(false)
 
     val linearProgress = MutableLiveData<Float>(0f)
     val radialProgress = MutableLiveData<Float>(0f)
 
     val colorAtProgressRangePairs = listOf(
 
-        0f .. 25f to R.color.kit_success,
-        25f .. 50f to R.color.kit_warning,
-        50f .. 100f to R.color.kit_alert,
-        25f .. 0f to R.color.kit_brand
+        ColorAtProgressRangePair(
+            colorRes = R.color.kit_success,
+            progressRange = 0f .. 25f
+        ),
+
+        ColorAtProgressRangePair(
+            colorRes = R.color.kit_warning,
+            progressRange = 25f .. 50f
+        ),
+
+        ColorAtProgressRangePair(
+            colorRes = R.color.kit_alert,
+            progressRange = 50f .. 100f
+        )
     )
 
     init {
@@ -37,13 +48,13 @@ class AllSpeedometersViewModel : ViewModel() {
         }
     }
 
-    fun testAllDivisionsLinear(view: View)  {
+    fun testAllDivisionsLinear(view: View) {
         viewModelScope.launch {
             testAllDivisionsLinearSpeedometer()
         }
     }
 
-    fun testAllDivisionsRadial(view: View)  {
+    fun testAllDivisionsRadial(view: View) {
         viewModelScope.launch {
             testAllDivisionsRadialSpeedometer()
         }

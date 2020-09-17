@@ -7,6 +7,7 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import androidx.annotation.ColorRes
 import fillooow.app.customprogressbar.R
+import fillooow.app.customprogressbar.custom_view.base.model.ColorAtProgressRangePair
 import kotlin.math.roundToInt
 
 /**
@@ -97,15 +98,10 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
 
         for (pair in colorAtProgressRangePairs) {
 
-            if (specifiedProgress in pair.progressRange()) {
-                progressColorResId = pair.colorRes()
+            if (specifiedProgress in pair.progressRange) {
+                progressColorResId = pair.colorRes
                 return
             }
         }
     }
 }
-
-private fun Pair<ClosedFloatingPointRange<Float>, Int>.progressRange() = first
-private fun Pair<ClosedFloatingPointRange<Float>, Int>.colorRes() = second
-
-typealias ColorAtProgressRangePair = Pair<ClosedFloatingPointRange<Float>, Int>
