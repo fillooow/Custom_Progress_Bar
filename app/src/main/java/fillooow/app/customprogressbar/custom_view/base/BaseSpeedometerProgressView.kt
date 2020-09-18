@@ -85,8 +85,14 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
      */
     protected fun calculateProgressDivisions() = (progress / 100f * (visibleDivisions + 1f)).roundToInt()
 
-    protected fun Canvas.drawBigDivision() = drawDivision(bigDivision)
-    protected fun Canvas.drawRegularDivision() = drawDivision(regularDivision)
+    protected fun Canvas.drawDivisionAtPosition(divisionPosition: Int) {
+
+        when (divisionPosition.rem(bigDivisionPeriodicity) != 0) {
+
+            true -> drawDivision(regularDivision)
+            false -> drawDivision(bigDivision)
+        }
+    }
 
     private fun Canvas.drawDivision(divisionRect: RectF) {
         drawRoundRect(divisionRect, divisionRadius, divisionRadius, divisionPaint)
@@ -115,6 +121,12 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
     )
 
     private fun updateProgressColor() {
+
+        when (specifiedProgress) {
+
+            in 0f .. 25f -> {
+            }
+        }
 
         for (pair in colorAtProgressRangePairs) {
 

@@ -105,7 +105,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
             rotate(ARC_START_ANGLE + ORIENTATION_CHANGE_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1))
 
-            if (divisionPosition.rem(bigDivisionPeriodicity) != 0) drawRegularDivision() else drawBigDivision()
+            drawDivisionAtPosition(divisionPosition)
             restore()
         }
     }
