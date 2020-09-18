@@ -5,7 +5,6 @@
 
         <attr name="speedometerText" format="string" />
         <attr name="animatedProgress" format="float" />
-        <attr name="colorAtProgressRangePairs" format="reference" />
 
     </declare-styleable>
 </resources>

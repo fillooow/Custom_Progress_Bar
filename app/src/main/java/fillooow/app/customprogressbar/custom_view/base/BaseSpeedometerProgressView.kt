@@ -92,7 +92,27 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
         drawRoundRect(divisionRect, divisionRadius, divisionRadius, divisionPaint)
     }
 
-    var colorAtProgressRangePairs: List<ColorAtProgressRangePair> = emptyList()
+    /**
+     * Сделать публичной и поменять на var,
+     * если нужно будет задать другие значения
+     */
+    private val colorAtProgressRangePairs: List<ColorAtProgressRangePair> = listOf(
+
+        ColorAtProgressRangePair(
+            colorRes = R.color.kit_success,
+            progressRange = 0f .. 25f
+        ),
+
+        ColorAtProgressRangePair(
+            colorRes = R.color.kit_warning,
+            progressRange = 25f .. 50f
+        ),
+
+        ColorAtProgressRangePair(
+            colorRes = R.color.kit_alert,
+            progressRange = 50f .. 100f
+        )
+    )
 
     private fun updateProgressColor() {
 

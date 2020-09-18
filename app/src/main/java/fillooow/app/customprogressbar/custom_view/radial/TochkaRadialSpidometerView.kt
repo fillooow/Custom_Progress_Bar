@@ -5,7 +5,6 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import fillooow.app.customprogressbar.R
-import fillooow.app.customprogressbar.custom_view.base.model.ColorAtProgressRangePair
 import fillooow.app.customprogressbar.custom_view.extension.applyStyleable
 import fillooow.app.customprogressbar.custom_view.extension.getColor
 import fillooow.app.customprogressbar.custom_view.extension.inflateAndAttach
@@ -36,13 +35,6 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
             if (value == radialSpeedometerProgressView.animatedProgress) return
 
             radialSpeedometerProgressView.animatedProgress = value
-        }
-
-    var colorAtProgressRangePairs: List<ColorAtProgressRangePair>
-        get() = radialSpeedometerProgressView.colorAtProgressRangePairs
-        set(value) {
-
-            radialSpeedometerProgressView.colorAtProgressRangePairs = value
         }
 
     private val radialSpeedometerTextView by lazy { tochka_radial_speedometer_view_text }

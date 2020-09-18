@@ -22,24 +22,6 @@ class AllSpeedometersViewModel : ViewModel() {
     val linearProgress = MutableLiveData<Float>(0f)
     val radialProgress = MutableLiveData<Float>(0f)
 
-    val colorAtProgressRangePairs = listOf(
-
-        ColorAtProgressRangePair(
-            colorRes = R.color.kit_success,
-            progressRange = 0f .. 25f
-        ),
-
-        ColorAtProgressRangePair(
-            colorRes = R.color.kit_warning,
-            progressRange = 25f .. 50f
-        ),
-
-        ColorAtProgressRangePair(
-            colorRes = R.color.kit_alert,
-            progressRange = 50f .. 100f
-        )
-    )
-
     init {
 
         viewModelScope.launch {
