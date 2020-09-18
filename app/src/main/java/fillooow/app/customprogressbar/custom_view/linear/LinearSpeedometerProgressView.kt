@@ -31,8 +31,10 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     override val regularItemTopOffset = (bigDivisionHeight - regularDivisionHeight) / 2
 
     override val bigDivision = RectF(0f, 0f, divisionWidth, bigDivisionHeight)
-    override val regularDivision = RectF(0f, regularItemTopOffset, divisionWidth,
-                                        regularDivisionHeight + regularItemTopOffset)
+    override val regularDivision = RectF(
+        0f, regularItemTopOffset, divisionWidth,
+        regularDivisionHeight + regularItemTopOffset
+    )
 
     override val bigDivisionPeriodicity = 7
 
