@@ -15,7 +15,7 @@ internal fun View.getColorStateList(@ColorRes colorResId: Int) = ContextCompat.g
 
 internal fun View.getFont(@FontRes fontResId: Int) = ResourcesCompat.getFont(context, fontResId)!!
 
-fun View.getPixels(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
+fun View.getDimension(@DimenRes dimensionResource: Int) = resources.getDimension(dimensionResource)
 
 internal fun View.increaseHitBox(@DimenRes increaseSizeResId: Int) {
 

@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import androidx.core.view.updateLayoutParams
 import fillooow.app.customprogressbar.R
 import fillooow.app.customprogressbar.custom_view.base.BaseSpeedometerProgressView
-import fillooow.app.customprogressbar.custom_view.extension.getPixels
+import fillooow.app.customprogressbar.custom_view.extension.getDimension
 
 class LinearSpeedometerProgressView @JvmOverloads constructor(
 
@@ -22,11 +22,11 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     override val backgroundPaintColorResId: Int = R.color.kit_grey_300
 
     override val visibleDivisions = 27
-    override val divisionRadius = getPixels(R.dimen.linear_speedometer_progress_bar_division_radius)
+    override val divisionRadius = getDimension(R.dimen.linear_speedometer_progress_bar_division_radius)
 
-    override val regularDivisionHeight = getPixels(R.dimen.linear_speedometer_progress_bar_regular_division_height)
-    override val bigDivisionHeight = getPixels(R.dimen.linear_speedometer_progress_bar_big_division_height)
-    override val divisionWidth = getPixels(R.dimen.linear_speedometer_progress_bar_division_width)
+    override val regularDivisionHeight = getDimension(R.dimen.linear_speedometer_progress_bar_regular_division_height)
+    override val bigDivisionHeight = getDimension(R.dimen.linear_speedometer_progress_bar_big_division_height)
+    override val divisionWidth = getDimension(R.dimen.linear_speedometer_progress_bar_division_width)
 
     override val regularItemTopOffset = (bigDivisionHeight - regularDivisionHeight) / 2
 

@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import androidx.core.view.updateLayoutParams
 import fillooow.app.customprogressbar.R
 import fillooow.app.customprogressbar.custom_view.base.BaseSpeedometerProgressView
-import fillooow.app.customprogressbar.custom_view.extension.getPixels
+import fillooow.app.customprogressbar.custom_view.extension.getDimension
 import fillooow.app.customprogressbar.custom_view.extension.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
@@ -34,9 +34,9 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     override val strokeWidthResId: Int = R.dimen.radial_speedometer_progress_bar_stroke_width
     override val backgroundPaintColorResId: Int = R.color.kit_grey_300
 
-    override val bigDivisionHeight = getPixels(R.dimen.radial_speedometer_progress_bar_big_division_height)
-    override val regularDivisionHeight = getPixels(R.dimen.radial_speedometer_progress_bar_regular_division_height)
-    override val divisionWidth = getPixels(R.dimen.radial_speedometer_progress_bar_division_width)
+    override val bigDivisionHeight = getDimension(R.dimen.radial_speedometer_progress_bar_big_division_height)
+    override val regularDivisionHeight = getDimension(R.dimen.radial_speedometer_progress_bar_regular_division_height)
+    override val divisionWidth = getDimension(R.dimen.radial_speedometer_progress_bar_division_width)
 
     override val regularItemTopOffset = (bigDivisionHeight - regularDivisionHeight) / 2
 
@@ -45,7 +45,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
     override val bigDivisionPeriodicity = 13
 
-    override val divisionRadius = getPixels(R.dimen.radial_speedometer_progress_bar_division_radius)
+    override val divisionRadius = getDimension(R.dimen.radial_speedometer_progress_bar_division_radius)
 
     private val circleCenter = viewHeight / 2f
     private val circleRadius = viewHeight / 2f - bigDivisionHeight / 2f
