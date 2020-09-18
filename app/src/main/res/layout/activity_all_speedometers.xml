@@ -48,7 +48,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linear_speedometer" />
 
-        <fillooow.app.customprogressbar.custom_view.radial.RadialSpeedometerProgressView
+        <fillooow.app.customprogressbar.custom_view.radial.TochkaRadialSpeedometerView
             android:id="@+id/radial_speedometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +56,8 @@
             app:animatedProgress="@{vm.radialProgress}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label" />
+            app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label"
+            app:speedometerText="@{vm.speedometerText}" />
 
         <Button
             android:id="@+id/all_speedometers_btn_linear"

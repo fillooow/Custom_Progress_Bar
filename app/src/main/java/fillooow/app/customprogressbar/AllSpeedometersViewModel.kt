@@ -21,6 +21,8 @@ class AllSpeedometersViewModel : ViewModel() {
     val linearProgress = MutableLiveData<Float>(0f)
     val radialProgress = MutableLiveData<Float>(0f)
 
+    val speedometerText = MutableLiveData("Нет операций")
+
     init {
 
         viewModelScope.launch {
@@ -68,27 +70,34 @@ class AllSpeedometersViewModel : ViewModel() {
 
         delay(800)
         radialProgress.value = 25f
+        speedometerText.value = textList.random()
 
         delay(800)
         radialProgress.value = 50f
+        speedometerText.value = textList.random()
 
         delay(800)
         radialProgress.value = 20f
+        speedometerText.value = textList.random()
 
         delay(800)
         radialProgress.value = 100f
+        speedometerText.value = textList.random()
 
 
         delay(800)
         radialProgress.value = 25f
+        speedometerText.value = textList.random()
 
         delay(800)
         radialProgress.value = 75f
+        speedometerText.value = textList.random()
 
         for (i in (0 .. 4)) {
 
             delay(800)
             radialProgress.value = (100f / 52f) * Random.nextInt(0 .. 52)
+            speedometerText.value = textList.random()
         }
 
         delay(800)
@@ -114,14 +123,22 @@ class AllSpeedometersViewModel : ViewModel() {
 
         isTestAllRadialBtnEnabled.value = false
 
-        delay(400)
-
         for (i in (0 .. (VISIBLE_DIVISIONS_LINEAR + 1))) {
 
             delay((ALL_VALUES_ANIMATION_TIME / (VISIBLE_DIVISIONS_RADIAL + 1)).toLong())
             radialProgress.value = (100f / (VISIBLE_DIVISIONS_LINEAR + 1)) * i
+
+            if (i.rem(13) == 0) speedometerText.value = textList.random()
         }
 
         isTestAllRadialBtnEnabled.value = true
     }
+
+    private val textList = listOf(
+        "Беспокоиться не о чем",
+        "Стоит обратить внимание",
+        "Возможны лимиты или запрос",
+        "Установлены лимиты",
+        "Установлены ограничения"
+    )
 }
