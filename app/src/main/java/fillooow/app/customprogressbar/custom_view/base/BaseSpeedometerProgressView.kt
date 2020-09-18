@@ -7,7 +7,6 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import androidx.annotation.ColorRes
 import fillooow.app.customprogressbar.R
-import fillooow.app.customprogressbar.custom_view.base.model.ColorAtProgressRangePair
 import kotlin.math.roundToInt
 
 /**
@@ -98,42 +97,15 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
         drawRoundRect(divisionRect, divisionRadius, divisionRadius, divisionPaint)
     }
 
-    /**
-     * Сделать публичной и поменять на var,
-     * если нужно будет задать другие значения
-     */
-    private val colorAtProgressRangePairs: List<ColorAtProgressRangePair> = listOf(
-
-        ColorAtProgressRangePair(
-            colorRes = R.color.kit_success,
-            progressRange = 0f .. 25f
-        ),
-
-        ColorAtProgressRangePair(
-            colorRes = R.color.kit_warning,
-            progressRange = 25f .. 50f
-        ),
-
-        ColorAtProgressRangePair(
-            colorRes = R.color.kit_alert,
-            progressRange = 50f .. 100f
-        )
-    )
-
     private fun updateProgressColor() {
 
-        when (specifiedProgress) {
+        progressColorResId = when (specifiedProgress) {
 
-            in 0f .. 25f -> {
-            }
-        }
+            in 0f .. 25f -> R.color.kit_success
+            in 25f .. 50f -> R.color.kit_warning
+            in 50f .. 100f -> R.color.kit_alert
 
-        for (pair in colorAtProgressRangePairs) {
-
-            if (specifiedProgress in pair.progressRange) {
-                progressColorResId = pair.colorRes
-                return
-            }
+            else -> R.color.kit_alert
         }
     }
 }
