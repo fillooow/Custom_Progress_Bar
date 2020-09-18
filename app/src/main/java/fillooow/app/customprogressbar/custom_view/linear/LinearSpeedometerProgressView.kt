@@ -82,12 +82,11 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
 
             drawDivisionAtPosition(divisionPosition)
 
-            regularDivision.offset(horizontalDivisionOffset + divisionWidth, 0f)
-            bigDivision.offset(horizontalDivisionOffset + divisionWidth, 0f)
+            drawDivisionAtPosition(divisionPosition)
+            offsetDivisionsPositions()
         }
 
-        regularDivision.offsetTo(0f, regularItemTopOffset)
-        bigDivision.offsetTo(0f, 0f)
+        restoreDivisionsPositions()
     }
 
     /**
@@ -99,6 +98,18 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     private fun calculateDivisionOffset(): Float {
 
         return (measuredWidth - divisionWidth * visibleDivisions) / (visibleDivisions - 1)
+    }
+
+    private fun offsetDivisionsPositions() {
+
+        regularDivision.offset(horizontalDivisionOffset + divisionWidth, 0f)
+        bigDivision.offset(horizontalDivisionOffset + divisionWidth, 0f)
+    }
+
+    private fun restoreDivisionsPositions() {
+
+        regularDivision.offsetTo(0f, regularItemTopOffset)
+        bigDivision.offsetTo(0f, 0f)
     }
 
     override fun onAttachedToWindow() {
