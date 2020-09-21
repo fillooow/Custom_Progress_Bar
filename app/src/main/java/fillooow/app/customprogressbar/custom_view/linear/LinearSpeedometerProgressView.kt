@@ -89,7 +89,7 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
              */
             if ((divisionPosition == divisionsRange.first) or (divisionPosition == divisionsRange.last)) continue
 
-            if ((divisionPosition == calculateProgressDivisions() + 1) or (calculateProgressDivisions() == 0)) {
+            if ((divisionPosition == calculateProgressDivisions()) or (calculateProgressDivisions() == 0)) {
                 divisionPaint.color = backgroundPaint.color
             }
 

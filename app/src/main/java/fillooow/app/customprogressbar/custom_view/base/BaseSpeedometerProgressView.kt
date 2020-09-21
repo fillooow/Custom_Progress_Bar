@@ -78,10 +78,14 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
 
     /**
      * Переводит [progress] в деления шкалы прогресса SpeedometerProgressView.
+     *
+     * Из-за удобства вычислений, подразумеваем, что имеется
+     * нулевое деление шкалы (которое не будет отрисовано). Поэтому,
+     * в формуле ниже дважды добавляется единица в разных местах.
      */
     protected fun calculateProgressDivisions(): Int {
 
-        return (progressPercents * (visibleDivisions + 1f)).roundToInt()
+        return (progressPercents * (visibleDivisions + 1f)).roundToInt() + 1
     }
 
     protected fun Canvas.drawDivisionAtPosition(divisionPosition: Int) {
