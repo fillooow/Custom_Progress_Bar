@@ -43,9 +43,6 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
             updateProgressColor()
         }
 
-    /**
-     * Количество видимых (рисуемых) шкал делений спидометра.
-     */
     protected abstract val visibleDivisions: Int
 
     /**
