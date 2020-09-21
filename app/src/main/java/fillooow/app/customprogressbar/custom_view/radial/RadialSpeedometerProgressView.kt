@@ -38,11 +38,7 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     override val regularDivisionHeight = getDimension(R.dimen.radial_speedometer_progress_bar_regular_division_height)
     override val divisionWidth = getDimension(R.dimen.radial_speedometer_progress_bar_division_width)
 
-    override val regularItemTopOffset = (bigDivisionHeight - regularDivisionHeight) / 2
-
     override val visibleDivisions = 51
-    override val divisionsRange = 0 .. 52
-
     override val bigDivisionPeriodicity = 13
 
     override val divisionRadius = getDimension(R.dimen.radial_speedometer_progress_bar_division_radius)

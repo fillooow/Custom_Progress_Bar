@@ -47,8 +47,13 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
 
     /**
      * Интервал, хранящий в себе индексы делений шкал. Используется при расчетах.
+     *
+     * Для удобства рассчетов и отрисовки подразумеваем, что у нас на 2 элемента больше,
+     * чем указано в [visibleDivisions]. Так удобнее вычислять и отрисовывать граничные
+     * деления шкалы прогресс бара.
      */
-    protected abstract val divisionsRange: IntRange
+    protected val divisionsRange: IntRange
+        get() = 0 .. visibleDivisions + 1
 
     /**
      * В спидометре большое деление шкалы - [bigDivision] - отрисовывается
@@ -66,7 +71,8 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
      * Так как [bigDivision] выше, чем [regularDivision],
      * нужно добавить отступ сверху для [regularDivision].
      */
-    protected abstract val regularItemTopOffset: Float
+    protected val regularItemTopOffset: Float
+        get() = (bigDivisionHeight - regularDivisionHeight) / 2
 
     protected abstract val bigDivision: RectF
     protected abstract val regularDivision: RectF

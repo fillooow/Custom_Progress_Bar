@@ -28,8 +28,6 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     override val bigDivisionHeight = getDimension(R.dimen.linear_speedometer_progress_bar_big_division_height)
     override val divisionWidth = getDimension(R.dimen.linear_speedometer_progress_bar_division_width)
 
-    override val regularItemTopOffset = (bigDivisionHeight - regularDivisionHeight) / 2
-
     override val bigDivision = RectF(0f, 0f, divisionWidth, bigDivisionHeight)
     override val regularDivision = RectF(
         0f, regularItemTopOffset, divisionWidth,
@@ -44,13 +42,6 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
         color = foregroundPaint.color
         isAntiAlias = true
     }
-
-    /**
-     * Для удобства рассчетов и отрисовки подразумеваем, что у нас на 2 элемента больше,
-     * чем указано в [visibleDivisions]. Так удобнее вычислять и отрисовывать граничные
-     * деления шкалы прогресс бара.
-     */
-    override val divisionsRange = 0 .. 28
 
     /**
      * Расстояние между соседними шкалами. Вычисляется
