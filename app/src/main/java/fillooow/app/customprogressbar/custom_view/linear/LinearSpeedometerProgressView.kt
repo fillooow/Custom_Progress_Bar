@@ -72,7 +72,9 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
      */
     private fun calculateDivisionOffset(): Float {
 
-        return (measuredWidth - divisionWidth * visibleDivisions) / (visibleDivisions - 1)
+        val offsetsBetweenDivisions = visibleDivisions - 1
+
+        return (measuredWidth - divisionWidth * visibleDivisions) / offsetsBetweenDivisions
     }
 
     override fun Canvas.drawProgress() {
