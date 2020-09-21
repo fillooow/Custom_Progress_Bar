@@ -41,7 +41,7 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     override val divisionPaint = Paint().apply {
 
         style = Paint.Style.FILL
-        color = backgroundPaint.color
+        color = foregroundPaint.color
         isAntiAlias = true
     }
 
