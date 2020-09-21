@@ -64,6 +64,17 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
         horizontalDivisionOffset = calculateDivisionOffset()
     }
 
+    /**
+     * Считает расстояние между делениями шкал в зависимости от ширины экрана
+     * доступной для отрисовки [LinearSpeedometerProgressView].
+     *
+     * Опирается на [getMeasuredWidth]
+     */
+    private fun calculateDivisionOffset(): Float {
+
+        return (measuredWidth - divisionWidth * visibleDivisions) / (visibleDivisions - 1)
+    }
+
     override fun Canvas.drawProgress() {
 
         divisionPaint.color = foregroundPaint.color
@@ -87,17 +98,6 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
         }
 
         restoreDivisionsPositions()
-    }
-
-    /**
-     * Считает расстояние между делениями шкал в зависимости от ширины экрана
-     * доступной для отрисовки [LinearSpeedometerProgressView].
-     *
-     * Опирается на [getMeasuredWidth]
-     */
-    private fun calculateDivisionOffset(): Float {
-
-        return (measuredWidth - divisionWidth * visibleDivisions) / (visibleDivisions - 1)
     }
 
     private fun offsetDivisionsPositions() {
