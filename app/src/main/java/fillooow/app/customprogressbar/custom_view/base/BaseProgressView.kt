@@ -75,6 +75,8 @@ abstract class BaseProgressView @JvmOverloads constructor(
             invalidate()
         }
 
+    protected val progressPercents = progress / MAX_PROGRESS_VALUE
+
     /**
      * Хранит конечное (до последующего изменения пользователем) значение
      * прогресса, к отрисовке этого значения стремится наследник [BaseProgressView]
