@@ -37,6 +37,24 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
             radialSpeedometerProgressView.animatedProgress = value
         }
 
+    var useRainbowColorResId: Boolean
+        get() = radialSpeedometerProgressView.useRainbowColorResId
+        set(value) {
+
+            if (value == radialSpeedometerProgressView.useRainbowColorResId) return
+
+            radialSpeedometerProgressView.useRainbowColorResId = value
+        }
+
+    var progressColorResId: Int
+        get() = radialSpeedometerProgressView.progressColorResId
+        set(value) {
+
+            if (value == radialSpeedometerProgressView.progressColorResId) return
+
+            radialSpeedometerProgressView.progressColorResId = value
+        }
+
     private val radialSpeedometerTextView by lazy { tochka_radial_speedometer_view_text }
     private val radialSpeedometerProgressView by lazy { tochka_radial_speedometer_progress_view }
 

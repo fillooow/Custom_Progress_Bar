@@ -13,6 +13,10 @@ class RadialSpeedometerViewModel : ViewModel() {
 
     var shouldShowNumberFormatExceptionToast = MutableLiveData<Boolean>(false)
 
+    val progressColorResId = MutableLiveData<Int>(R.color.kit_primary)
+
+    val useRainbowColorResId = MutableLiveData<Boolean>(true)
+
     val radialProgress = MutableLiveData<Float>(0f)
     val editTextCharacters = MutableLiveData<String>("50, 77.5, 22")
 

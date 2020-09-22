@@ -36,10 +36,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 app:animatedProgress="@{vm.radialProgress}"
+                app:speedometerText="@{vm.speedometerText}"
+                app:useRainbowColorResId="@{vm.useRainbowColorResId}"
+                app:progressColorResId="@{vm.progressColorResId}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/radial_speedometer_label"
-                app:speedometerText="@{vm.speedometerText}"
                 tools:text="немного немного немного немного немного текста" />
 
             <TextView
