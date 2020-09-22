@@ -85,8 +85,6 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
             }
 
             drawDivisionAtPosition(divisionPosition)
-
-            drawDivisionAtPosition(divisionPosition)
             offsetDivisionsPositions()
         }
 
