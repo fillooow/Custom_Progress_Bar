@@ -84,10 +84,11 @@ abstract class BaseProgressView @JvmOverloads constructor(
      */
     private var specifiedProgress = 0f
         private set(value) {
-            field = onChangeSpecifiedProgress(value)
+            field = value
+            onSpecifiedProgressChange(value)
         }
 
-    protected open fun onChangeSpecifiedProgress(specifiedProgress: Float) = specifiedProgress
+    protected open fun onSpecifiedProgressChange(specifiedProgress: Float) = Unit
 
     protected val resolvedStrokeWidth by lazy { resources.getDimensionPixelSize(strokeWidthResId) }
 

@@ -36,11 +36,8 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
     override val foregroundPaintColorResId: Int
         get() = progressColorResId
 
-    override fun onChangeSpecifiedProgress(specifiedProgress: Float): Float {
-
+    override fun onSpecifiedProgressChange(specifiedProgress: Float) {
         updateProgressColor(specifiedProgress)
-
-        return specifiedProgress
     }
 
     protected abstract val visibleDivisions: Int
