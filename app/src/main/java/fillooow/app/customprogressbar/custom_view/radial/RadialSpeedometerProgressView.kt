@@ -99,7 +99,8 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
 
             translate(divisionLeftTopCornerX, divisionLeftTopCornerY)
 
-            rotate(ARC_START_ANGLE + ORIENTATION_CHANGE_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * (divisionPosition - 1))
+            val previousDivisionPosition = divisionPosition - 1
+            rotate(ARC_START_ANGLE + ORIENTATION_CHANGE_ANGLE + ARC_ANGLE_BETWEEN_ITEMS * previousDivisionPosition)
 
             drawDivisionAtPosition(divisionPosition)
             restore()
