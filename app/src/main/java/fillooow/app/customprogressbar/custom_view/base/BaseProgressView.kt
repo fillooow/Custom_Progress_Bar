@@ -66,10 +66,7 @@ abstract class BaseProgressView @JvmOverloads constructor(
      */
     var progress = 0f
         set(value) {
-            field = value.coerceIn(
-                MIN_PROGRESS_VALUE,
-                MAX_PROGRESS_VALUE
-            )
+            field = value.coerceIn(MIN_PROGRESS_VALUE, MAX_PROGRESS_VALUE)
             invalidate()
         }
 
@@ -127,8 +124,7 @@ abstract class BaseProgressView @JvmOverloads constructor(
 
         ObjectAnimator.ofFloat(this, "progress", progress).apply {
             duration = resources.getInteger(android.R.integer.config_longAnimTime).toLong()
-            interpolator =
-                BezierInterpolator.getDefaultPrincipleInstance()
+            interpolator = BezierInterpolator.getDefaultPrincipleInstance()
         }
     }
 
