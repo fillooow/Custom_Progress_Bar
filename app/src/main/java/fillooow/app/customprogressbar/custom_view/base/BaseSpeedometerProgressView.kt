@@ -28,17 +28,40 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
 
     /**
      * Публичная переменная, с помощью которой можно
-     * менять цвет шкалы деления прогресса
+     * менять цветовой ресурс шкалы деления прогресса
      */
     @ColorRes
     var progressColorResId: Int = R.color.kit_brand
 
-    override val foregroundPaintColorResId: Int
-        get() = progressColorResId
+    /**
+     * Позволяет указать, следует ли использовать в качестве
+     * цветового ресурса прогресса поле [rainbowColorResId]
+     *
+     * true - если нужно, чтобы цвет прогресса менялся на лету в зависимости
+     * от текущего значения прогресса - [progress]. В таком случае, ресурс цвета
+     * регулируется полем [rainbowColorResId]
+     *
+     * false - если нужно, чтобы цвет прогресса не изменялся на лету. В таком случае,
+     * регулировать цвет прогресса можно полем [progressColorResId]
+     */
+    var useRainbowColorResId: Boolean = false
 
-    override fun onSpecifiedProgressChange(specifiedProgress: Float) {
-        updateProgressColor(specifiedProgress)
-    }
+    /**
+     * Позволяет задать в качестве цветового ресурса прогресса ресурс, который
+     * будет на лету меняться в зависимости от прогресса в текущий момент времени
+     */
+    private val rainbowColorResId: Int
+        get() = when (progress) {
+
+            in 0f .. 25f -> R.color.kit_success
+            in 25f .. 50f -> R.color.kit_warning
+            in 50f .. 100f -> R.color.kit_alert
+
+            else -> R.color.kit_alert
+        }
+
+    override val foregroundPaintColorResId: Int
+        get() = if (useRainbowColorResId) rainbowColorResId else progressColorResId
 
     protected abstract val visibleDivisions: Int
 
@@ -102,17 +125,5 @@ abstract class BaseSpeedometerProgressView @JvmOverloads constructor(
 
     private fun Canvas.drawDivision(divisionRect: RectF) {
         drawRoundRect(divisionRect, divisionRadius, divisionRadius, divisionPaint)
-    }
-
-    private fun updateProgressColor(specifiedProgress: Float) {
-
-        progressColorResId = when (specifiedProgress) {
-
-            in 0f .. 25f -> R.color.kit_success
-            in 25f .. 50f -> R.color.kit_warning
-            in 50f .. 100f -> R.color.kit_alert
-
-            else -> R.color.kit_alert
-        }
     }
 }

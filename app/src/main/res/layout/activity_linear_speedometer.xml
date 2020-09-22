@@ -32,6 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             app:animatedProgress="@{vm.linearProgress}"
+            app:progressColorResId="@{vm.progressColorResId}"
+            app:useRainbowColorResId="@{vm.isRainbowResIdUsing}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"

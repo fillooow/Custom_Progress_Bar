@@ -57,8 +57,6 @@ abstract class BaseProgressView @JvmOverloads constructor(
         get() = progress
         set(value) = with(animator) {
 
-            specifiedProgress = value
-
             setFloatValues(value)
             start()
         }
@@ -77,18 +75,6 @@ abstract class BaseProgressView @JvmOverloads constructor(
 
     protected val progressPercents
         get() = progress / MAX_PROGRESS_VALUE
-
-    /**
-     * Хранит конечное (до последующего изменения пользователем) значение
-     * прогресса, к отрисовке этого значения стремится наследник [BaseProgressView]
-     */
-    private var specifiedProgress = 0f
-        private set(value) {
-            field = value
-            onSpecifiedProgressChange(value)
-        }
-
-    protected open fun onSpecifiedProgressChange(specifiedProgress: Float) = Unit
 
     protected val resolvedStrokeWidth by lazy { resources.getDimensionPixelSize(strokeWidthResId) }
 
@@ -154,7 +140,6 @@ abstract class BaseProgressView @JvmOverloads constructor(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
 
-        if (isInEditMode) progress =
-            EDIT_MODE_PROGRESS_VALUE
+        if (isInEditMode) progress = EDIT_MODE_PROGRESS_VALUE
     }
 }
