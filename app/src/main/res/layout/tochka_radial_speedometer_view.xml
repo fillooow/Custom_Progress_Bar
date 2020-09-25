@@ -25,6 +25,7 @@
         android:layout_marginEnd="@dimen/space_8"
         android:textColor="@color/kit_grey_400"
         app:viewStyle="TS500_XL"
+        app:removeDanglingPrepositions="false"
         tools:text="Нет операций" />
 
 </merge>

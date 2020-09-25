@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:screenOrientation="portrait"
-            tools:context=".LinearSpeedometerActivity">
+            tools:context=".RadialSpeedometerActivity">
 
             <TextView
                 android:id="@+id/radial_speedometer_label"
@@ -67,6 +67,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_radial_text_input_symbols" />
 
+            <LinearLayout
+                android:id="@+id/radial_checkbox_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radial_activity_et">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enable_color_on_fly"
+                    android:layout_marginStart="40dp"/>
+
+                <CheckBox
+                    android:id="@+id/radial_rainbow_color_res_id_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:checked="@={vm.useRainbowColorResId}" />
+
+            </LinearLayout>
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +101,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/radial_activity_et" />
+                app:layout_constraintTop_toBottomOf="@id/radial_checkbox_container" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

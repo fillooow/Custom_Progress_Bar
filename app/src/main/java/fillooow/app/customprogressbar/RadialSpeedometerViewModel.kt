@@ -13,9 +13,9 @@ class RadialSpeedometerViewModel : ViewModel() {
 
     var shouldShowNumberFormatExceptionToast = MutableLiveData<Boolean>(false)
 
-    val progressColorResId = MutableLiveData<Int>(R.color.kit_primary)
+    val progressColorResId = MutableLiveData<Int>(R.color.kit_success)
 
-    val useRainbowColorResId = MutableLiveData<Boolean>(true)
+    val useRainbowColorResId = MutableLiveData<Boolean>(false)
 
     val radialProgress = MutableLiveData<Float>(0f)
     val editTextCharacters = MutableLiveData<String>("50, 77.5, 22")
@@ -28,9 +28,14 @@ class RadialSpeedometerViewModel : ViewModel() {
                 val progressValues = editTextCharacters.value!!.trim().split(",").map(String::toFloat)
 
                 progressValues.forEach {
+
                     delay(1000)
+                    if (useRainbowColorResId.value!!.not()) {
+
+                        progressColorResId.value = mapColorResIdAtProgress(it)
+                    }
+                    speedometerText.value = mapRadialTextAtProgress(it)
                     radialProgress.value = it
-                    speedometerText.value = textList.random()
                 }
             } catch (error: NumberFormatException) {
 
@@ -39,11 +44,24 @@ class RadialSpeedometerViewModel : ViewModel() {
         }
     }
 
-    private val textList = listOf(
-        "Беспокоиться не о чем",
-        "Стоит обратить внимание",
-        "Возможны лимиты или запрос",
-        "Установлены лимиты",
-        "Установлены ограничения"
-    )
+    private fun mapColorResIdAtProgress(progress: Float) = when (progress) {
+
+        in 0f .. 25f -> R.color.kit_success
+        in 25f .. 50f -> R.color.kit_warning
+        in 50f .. 100f -> R.color.kit_alert
+
+        else -> R.color.kit_alert
+    }
+
+    private fun mapRadialTextAtProgress(progress: Float) = when (progress) {
+
+        in 0f .. 0f -> "Нет операций"
+        in 0f .. 25f -> "Беспокоиться не о чем"
+        in 25f .. 50f -> "Стоит обратить внимание"
+        in 50f .. 75f -> "Возможны лимиты или запрос"
+        in 100f .. 100f -> "Установлены ограничения"
+        in 75f .. 100f -> "Установлены лимиты"
+
+        else -> "Установлены ограничения"
+    }
 }

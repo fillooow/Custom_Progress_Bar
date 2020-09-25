@@ -18,6 +18,10 @@ class AllSpeedometersViewModel : ViewModel() {
     var isTestAllLinearBtnEnabled = MutableLiveData(false)
     var isTestAllRadialBtnEnabled = MutableLiveData(false)
 
+    val useRainbowResIdUsing = MutableLiveData<Boolean>(false)
+    val progressColorRadialResId = MutableLiveData<Int>(R.color.kit_success)
+    val progressColorLinearResId = MutableLiveData<Int>(R.color.kit_success)
+
     val linearProgress = MutableLiveData<Float>(0f)
     val radialProgress = MutableLiveData<Float>(0f)
 
@@ -45,63 +49,33 @@ class AllSpeedometersViewModel : ViewModel() {
 
     private suspend fun defaultTestLinearSpeedometer() {
 
-        delay(800)
-        linearProgress.value = 50f
+        val defaultValuesForTest = listOf(50f, 0f, 100f, 25f, 75f, 40f)
 
-        delay(800)
-        linearProgress.value = 0f
-
-        delay(800)
-        linearProgress.value = 100f
-
-        delay(800)
-        linearProgress.value = 25f
-
-        delay(800)
-        linearProgress.value = 75f
-
-        delay(800)
-        linearProgress.value = 40f
+        defaultValuesForTest.forEach{
+            setupLinearProgress(it)
+        }
 
         isTestAllLinearBtnEnabled.value = true
     }
 
     private suspend fun defaultTestRadialSpeedometer() {
+        /*
 
-        delay(800)
-        radialProgress.value = 25f
-        speedometerText.value = textList.random()
+        val defaultValuesForTest = listOf(25f, 50f, 20f, 100f, 25f, 75f)
 
-        delay(800)
-        radialProgress.value = 50f
-        speedometerText.value = textList.random()
-
-        delay(800)
-        radialProgress.value = 20f
-        speedometerText.value = textList.random()
-
-        delay(800)
-        radialProgress.value = 100f
-        speedometerText.value = textList.random()
-
-
-        delay(800)
-        radialProgress.value = 25f
-        speedometerText.value = textList.random()
-
-        delay(800)
-        radialProgress.value = 75f
-        speedometerText.value = textList.random()
+        defaultValuesForTest.forEach {
+            setupRadialProgress(it)
+        }
 
         for (i in (0 .. 4)) {
 
             delay(800)
-            radialProgress.value = (100f / 52f) * Random.nextInt(0 .. 52)
-            speedometerText.value = textList.random()
+            val nextRandom = (100f / 52f) * Random.nextInt(0 .. 52)
+            setupRadialProgress(nextRandom)
         }
 
         delay(800)
-        radialProgress.value = 40f
+        setupRadialProgress(40f)*/
 
         isTestAllRadialBtnEnabled.value = true
     }
@@ -112,8 +86,9 @@ class AllSpeedometersViewModel : ViewModel() {
 
         for (i in (0 .. (VISIBLE_DIVISIONS_LINEAR + 1))) {
 
-            delay((ALL_VALUES_ANIMATION_TIME / (VISIBLE_DIVISIONS_LINEAR + 1)).toLong())
-            linearProgress.value = (100f / (VISIBLE_DIVISIONS_LINEAR + 1)) * i
+//            delay((ALL_VALUES_ANIMATION_TIME / (VISIBLE_DIVISIONS_LINEAR + 1)).toLong())
+            val nextProgress = (100f / (VISIBLE_DIVISIONS_LINEAR + 1)) * i
+            setupLinearProgress(nextProgress)
         }
 
         isTestAllLinearBtnEnabled.value = true
@@ -125,20 +100,52 @@ class AllSpeedometersViewModel : ViewModel() {
 
         for (i in (0 .. (VISIBLE_DIVISIONS_LINEAR + 1))) {
 
-            delay((ALL_VALUES_ANIMATION_TIME / (VISIBLE_DIVISIONS_RADIAL + 1)).toLong())
-            radialProgress.value = (100f / (VISIBLE_DIVISIONS_LINEAR + 1)) * i
-
-            if (i.rem(13) == 0) speedometerText.value = textList.random()
+//            delay((ALL_VALUES_ANIMATION_TIME / (VISIBLE_DIVISIONS_RADIAL + 1)).toLong())
+            val nextProgress = (100f / (VISIBLE_DIVISIONS_LINEAR + 1)) * i
+            setupRadialProgress(nextProgress)
         }
 
         isTestAllRadialBtnEnabled.value = true
     }
 
-    private val textList = listOf(
-        "Беспокоиться не о чем",
-        "Стоит обратить внимание",
-        "Возможны лимиты или запрос",
-        "Установлены лимиты",
-        "Установлены ограничения"
-    )
+    private fun mapColorResIdAtProgress(progress: Float) = when (progress) {
+
+        in 0f .. 25f -> R.color.kit_success
+        in 25f .. 50f -> R.color.kit_warning
+        in 50f .. 100f -> R.color.kit_alert
+
+        else -> R.color.kit_alert
+    }
+
+    private suspend fun setupLinearProgress(progress: Float) {
+
+        delay(800)
+        if (useRainbowResIdUsing.value!!.not()) {
+
+            progressColorLinearResId.value = mapColorResIdAtProgress(progress)
+        }
+        linearProgress.value = progress
+    }
+
+    private suspend fun setupRadialProgress(progress: Float) {
+
+        delay(800)
+        if (useRainbowResIdUsing.value!!.not()) {
+
+            progressColorRadialResId.value = mapColorResIdAtProgress(progress)
+        }
+        speedometerText.value = mapRadialTextAtProgress(progress)
+        radialProgress.value = progress
+    }
+
+    private fun mapRadialTextAtProgress(progress: Float) = when (progress) {
+
+        in 0f .. 0f -> "Нет операций"
+        in 0f .. 25f -> "Беспокоиться не о чем"
+        in 25f .. 50f -> "Стоит обратить внимание"
+        in 50f .. 75f -> "Возможны лимиты или запрос"
+        in 75f .. 100f -> "Установлены лимиты"
+
+        else -> "Установлены ограничения"
+    }
 }

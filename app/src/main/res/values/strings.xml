@@ -8,5 +8,6 @@
     <string name="btn_to_all_speedometers">All Speedometers</string>
     <string name="start_animation">start animation</string>
     <string name="hint_input_numbers">Введи через запятую числа от 0 до 100, чтобы указать, какие значения прогресса нужно проанимировать спидометру</string>
+    <string name="enable_color_on_fly">Включить смену цвета на лету</string>
 
 </resources>
