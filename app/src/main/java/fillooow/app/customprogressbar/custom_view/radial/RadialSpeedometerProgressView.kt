@@ -34,6 +34,8 @@ class RadialSpeedometerProgressView @JvmOverloads constructor(
     override val strokeWidthResId: Int = R.dimen.radial_speedometer_progress_bar_stroke_width
     override val backgroundPaintColorResId: Int = R.color.kit_grey_300
 
+    override val animationDuration = 2000L
+
     override val bigDivisionHeight = getDimension(R.dimen.radial_speedometer_progress_bar_big_division_height)
     override val regularDivisionHeight = getDimension(R.dimen.radial_speedometer_progress_bar_regular_division_height)
     override val divisionWidth = getDimension(R.dimen.radial_speedometer_progress_bar_division_width)

@@ -120,10 +120,12 @@ abstract class BaseProgressView @JvmOverloads constructor(
      */
     private var cachedForegroundPaint: Paint? = null
 
+    open val animationDuration = resources.getInteger(android.R.integer.config_longAnimTime).toLong()
+
     private val animator by lazy {
 
         ObjectAnimator.ofFloat(this, "progress", progress).apply {
-            duration = resources.getInteger(android.R.integer.config_longAnimTime).toLong()
+            duration = animationDuration
             interpolator = BezierInterpolator.getDefaultPrincipleInstance()
         }
     }

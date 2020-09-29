@@ -21,6 +21,8 @@ class LinearSpeedometerProgressView @JvmOverloads constructor(
     override val strokeWidthResId: Int = R.dimen.linear_speedometer_progress_bar_stroke_width
     override val backgroundPaintColorResId: Int = R.color.kit_grey_300
 
+    override val animationDuration = 1500L
+
     override val visibleDivisions = 27
     override val divisionRadius = getDimension(R.dimen.linear_speedometer_progress_bar_division_radius)
 
