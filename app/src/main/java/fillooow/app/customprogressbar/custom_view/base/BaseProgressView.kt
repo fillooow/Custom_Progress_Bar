@@ -120,7 +120,7 @@ abstract class BaseProgressView @JvmOverloads constructor(
      */
     private var cachedForegroundPaint: Paint? = null
 
-    open val animationDuration = resources.getInteger(android.R.integer.config_longAnimTime).toLong()
+    open var animationDuration = resources.getInteger(android.R.integer.config_longAnimTime).toLong()
 
     private val animator by lazy {
 
