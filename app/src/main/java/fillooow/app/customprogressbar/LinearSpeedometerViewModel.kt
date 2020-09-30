@@ -24,14 +24,15 @@ class LinearSpeedometerViewModel : ViewModel() {
 
                 val progressValues = editTextCharacters.value!!.trim().split(",").map(String::toFloat)
 
-                progressValues.forEach {
+                progressValues.forEachIndexed { index, progressValue ->
 
-                    delay(800)
+                    if (index != 0) delay(1700)
+
                     if (isRainbowResIdUsing.value!!.not()) {
 
-                        progressColorResId.value = mapColorResIdAtProgress(it)
+                        progressColorResId.value = mapColorResIdAtProgress(progressValue)
                     }
-                    linearProgress.value = it
+                    linearProgress.value = progressValue
                 }
             } catch (error: NumberFormatException) {
 

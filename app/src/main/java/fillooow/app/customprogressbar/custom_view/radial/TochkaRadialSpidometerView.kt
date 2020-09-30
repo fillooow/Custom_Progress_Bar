@@ -37,6 +37,15 @@ class TochkaRadialSpeedometerView @JvmOverloads constructor(
             radialSpeedometerProgressView.animatedProgress = value
         }
 
+    var animationDuration: Long
+        get() = radialSpeedometerProgressView.animationDuration
+        set(value) {
+
+            if (value == radialSpeedometerProgressView.animationDuration) return
+
+            radialSpeedometerProgressView.animationDuration = value
+        }
+
     var useRainbowColorResId: Boolean
         get() = radialSpeedometerProgressView.useRainbowColorResId
         set(value) {

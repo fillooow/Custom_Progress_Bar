@@ -15,6 +15,9 @@ private const val ALL_VALUES_ANIMATION_TIME = (VISIBLE_DIVISIONS_RADIAL + 1) * (
 
 class AllSpeedometersViewModel : ViewModel() {
 
+    var linearAnimationDuration = MutableLiveData(1500L)
+    var radialAnimationDuration = MutableLiveData(2000L)
+
     var isTestAllLinearBtnEnabled = MutableLiveData(false)
     var isTestAllRadialBtnEnabled = MutableLiveData(false)
 
@@ -30,8 +33,11 @@ class AllSpeedometersViewModel : ViewModel() {
     init {
 
         viewModelScope.launch {
-            defaultTestLinearSpeedometer()
-            defaultTestRadialSpeedometer()
+            isTestAllRadialBtnEnabled.value = true
+
+//            defaultTestLinearSpeedometer()
+            setupRadialProgress(40f)
+//            defaultTestRadialSpeedometer()
         }
     }
 
@@ -59,7 +65,6 @@ class AllSpeedometersViewModel : ViewModel() {
     }
 
     private suspend fun defaultTestRadialSpeedometer() {
-        /*
 
         val defaultValuesForTest = listOf(25f, 50f, 20f, 100f, 25f, 75f)
 
@@ -69,13 +74,11 @@ class AllSpeedometersViewModel : ViewModel() {
 
         for (i in (0 .. 4)) {
 
-            delay(800)
             val nextRandom = (100f / 52f) * Random.nextInt(0 .. 52)
             setupRadialProgress(nextRandom)
         }
 
-        delay(800)
-        setupRadialProgress(40f)*/
+        setupRadialProgress(40f)
 
         isTestAllRadialBtnEnabled.value = true
     }
@@ -83,6 +86,7 @@ class AllSpeedometersViewModel : ViewModel() {
     private suspend fun testAllDivisionsLinearSpeedometer() {
 
         isTestAllLinearBtnEnabled.value = false
+        linearAnimationDuration.value = 300L
 
         for (i in (0 .. (VISIBLE_DIVISIONS_LINEAR + 1))) {
 
@@ -92,19 +96,26 @@ class AllSpeedometersViewModel : ViewModel() {
         }
 
         isTestAllLinearBtnEnabled.value = true
+        linearAnimationDuration.value = 1500L
     }
 
     private suspend fun testAllDivisionsRadialSpeedometer() {
 
         isTestAllRadialBtnEnabled.value = false
+        radialAnimationDuration.value = 300L
 
-        for (i in (0 .. (VISIBLE_DIVISIONS_LINEAR + 1))) {
+        setupRadialProgress(0f)
+
+        delay(1500L)
+
+        for (i in (0 .. (VISIBLE_DIVISIONS_RADIAL + 1))) {
 
 //            delay((ALL_VALUES_ANIMATION_TIME / (VISIBLE_DIVISIONS_RADIAL + 1)).toLong())
-            val nextProgress = (100f / (VISIBLE_DIVISIONS_LINEAR + 1)) * i
+            val nextProgress = (100f / (VISIBLE_DIVISIONS_RADIAL + 1)) * i
             setupRadialProgress(nextProgress)
         }
 
+        radialAnimationDuration.value = 2000L
         isTestAllRadialBtnEnabled.value = true
     }
 
@@ -119,23 +130,26 @@ class AllSpeedometersViewModel : ViewModel() {
 
     private suspend fun setupLinearProgress(progress: Float) {
 
-        delay(800)
+        linearProgress.value = progress
+
+        delay(linearAnimationDuration.value!!.plus(300L))
         if (useRainbowResIdUsing.value!!.not()) {
 
             progressColorLinearResId.value = mapColorResIdAtProgress(progress)
         }
-        linearProgress.value = progress
     }
 
     private suspend fun setupRadialProgress(progress: Float) {
 
-        delay(800)
+        radialProgress.value = progress
         if (useRainbowResIdUsing.value!!.not()) {
 
             progressColorRadialResId.value = mapColorResIdAtProgress(progress)
         }
         speedometerText.value = mapRadialTextAtProgress(progress)
-        radialProgress.value = progress
+
+//        delay(1000)
+        delay(radialAnimationDuration.value!!.plus(600L))
     }
 
     private fun mapRadialTextAtProgress(progress: Float) = when (progress) {
@@ -144,6 +158,7 @@ class AllSpeedometersViewModel : ViewModel() {
         in 0f .. 25f -> "Беспокоиться не о чем"
         in 25f .. 50f -> "Стоит обратить внимание"
         in 50f .. 75f -> "Возможны лимиты или запрос"
+        in 100f .. 100f -> "Установлены ограничения"
         in 75f .. 100f -> "Установлены лимиты"
 
         else -> "Установлены ограничения"

@@ -27,15 +27,16 @@ class RadialSpeedometerViewModel : ViewModel() {
 
                 val progressValues = editTextCharacters.value!!.trim().split(",").map(String::toFloat)
 
-                progressValues.forEach {
+                progressValues.forEachIndexed { index, progressValue ->
 
-                    delay(1000)
+                    if (index != 0) delay(2300)
+
                     if (useRainbowColorResId.value!!.not()) {
 
-                        progressColorResId.value = mapColorResIdAtProgress(it)
+                        progressColorResId.value = mapColorResIdAtProgress(progressValue)
                     }
-                    speedometerText.value = mapRadialTextAtProgress(it)
-                    radialProgress.value = it
+                    speedometerText.value = mapRadialTextAtProgress(progressValue)
+                    radialProgress.value = progressValue
                 }
             } catch (error: NumberFormatException) {
 
